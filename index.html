@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delfos Hub - Web3 products on Terra Classic</title>
+<meta name="description" content="Delfos Hub builds Frontier wallet, Terra Oracle and Repeg Club on Terra Classic.">
+<meta name="theme-color" content="#0A0420">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://delfos-hub.net/">
+<meta property="og:title" content="Delfos Hub - Web3 products on Terra Classic">
+<meta property="og:description" content="Frontier wallet, Terra Oracle and Repeg Club. One hub, one chain.">
+<meta property="og:image" content="https://delfos-hub.net/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>html{scroll-behavior:smooth;background:#0A0420}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=Silkscreen:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0420}
+h1,h2{text-transform:uppercase;letter-spacing:0.02em}
+a{color:#F5C451;text-decoration:none}a:hover{color:#FFE09A}
+.stage{perspective:1600px;perspective-origin:50% 40%}
+.tilt-l{transform:rotateY(-16deg) rotateX(7deg);transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);position:relative}
+.tilt-r{transform:rotateY(16deg) rotateX(7deg);transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);position:relative}
+.tilt-l:hover,.tilt-r:hover{transform:rotateY(0deg) rotateX(0deg) scale(1.14);z-index:10!important}
+section .stage:has(.tilt-l:hover) .float-a,section .stage:has(.tilt-r:hover) .float-a{z-index:10!important}
+section .stage:has(.tilt-l:hover)>.float-b,section .stage:has(.tilt-l:hover)>.float-c,section .stage:has(.tilt-r:hover)>.float-b,section .stage:has(.tilt-r:hover)>.float-c{opacity:.25;transition:opacity .4s ease}
+.tilt-l,.tilt-r{cursor:zoom-in}
+.float-a{animation:floatA 7s ease-in-out infinite}
+.float-b{animation:floatB 8s ease-in-out infinite}
+.float-c{animation:floatA 9s ease-in-out infinite}
+.spin{animation:spin 60s linear infinite}
+.spin-rev{animation:spin 90s linear infinite reverse}
+@keyframes floatA{0%,100%{translate:0 0}50%{translate:0 -14px}}
+@keyframes floatB{0%,100%{translate:0 0}50%{translate:0 12px}}
+@keyframes spin{to{rotate:360deg}}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.card-hover{transition:transform .4s ease,border-color .4s ease}
+.card-hover:hover{transform:translateY(-6px);border-color:rgba(245,196,81,.5)}
+@media (prefers-reduced-motion: reduce){.float-a,.float-b,.float-c,.spin,.spin-rev{animation:none}.tilt-l,.tilt-r,.card-hover,.lift{transition:none}}
+.orbit{position:absolute;left:50%;top:44%;border-radius:50%;transform-style:preserve-3d}
+.orbit-1{width:500px;height:500px;margin:-250px 0 0 -250px;border:1px solid rgba(245,196,81,.45);animation:orb1 26s linear infinite}
+.orbit-2{width:400px;height:400px;margin:-200px 0 0 -200px;border:1px dashed rgba(182,155,255,.45);animation:orb2 34s linear infinite}
+.orbit-3{width:600px;height:600px;margin:-300px 0 0 -300px;border:1px solid rgba(182,155,255,.2);animation:orb3 44s linear infinite}
+@keyframes orb1{from{transform:rotateX(74deg) rotateY(-10deg) rotateZ(0deg)}to{transform:rotateX(74deg) rotateY(-10deg) rotateZ(360deg)}}
+@keyframes orb2{from{transform:rotateX(66deg) rotateY(18deg) rotateZ(360deg)}to{transform:rotateX(66deg) rotateY(18deg) rotateZ(0deg)}}
+@keyframes orb3{from{transform:rotateX(80deg) rotateY(4deg) rotateZ(0deg)}to{transform:rotateX(80deg) rotateY(4deg) rotateZ(360deg)}}
+.orbit-dot{position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%}
+.floor{position:absolute;left:-30%;right:-30%;bottom:-120px;height:460px;transform:rotateX(76deg);transform-origin:50% 100%;background-image:linear-gradient(rgba(150,110,255,.38) 1px,transparent 1px),linear-gradient(90deg,rgba(150,110,255,.38) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 65%);mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 65%)}
+.coin{transform-style:preserve-3d;animation:coin 9s ease-in-out infinite}
+@keyframes coin{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.core{animation:core 6s ease-in-out infinite}
+@keyframes core{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.02)}}
+.pixel{image-rendering:pixelated}
+.shot{display:block;width:100%;height:auto}
+.say-h{grid-area:1/1;font-family:'Silkscreen',monospace;font-size:11px;line-height:1.35;letter-spacing:.04em;color:#1A0B3D;text-transform:uppercase;opacity:0}
+.host{transition:transform .5s cubic-bezier(.2,.8,.2,1.2)}
+section .stage:has(.tilt-r:hover) .host{z-index:12!important;transform:translate(26px,-8px) rotate(4deg)}
+section .stage:has(.tilt-r:hover) .host .say{animation:none;opacity:0}
+section .stage:has(.tilt-r:hover) .host .say-h{opacity:1}
+section .stage:has(.tilt-r:hover) .host .bubble{animation:none;opacity:1;transform:scale(1.06)}
+section .stage:has(.tilt-r:hover) .host .host-img{animation-duration:.9s}
+.host-img{transform-origin:50% 100%;animation:hostBob 2.4s ease-in-out infinite}
+@keyframes hostBob{0%,100%{transform:translateY(0) rotate(-1.5deg) scaleY(1)}25%{transform:translateY(-6px) rotate(0deg) scaleY(1.02)}50%{transform:translateY(0) rotate(1.5deg) scaleY(.98)}75%{transform:translateY(-4px) rotate(0deg) scaleY(1.01)}}
+.host-shadow{position:absolute;left:18%;right:18%;bottom:-6px;height:10px;border-radius:50%;background:rgba(0,0,0,.45);filter:blur(4px);animation:hostShadow 2.4s ease-in-out infinite}
+@keyframes hostShadow{0%,50%,100%{transform:scaleX(1);opacity:.55}25%,75%{transform:scaleX(.82);opacity:.35}}
+.bubble{position:absolute;right:62%;bottom:96%;width:max-content;max-width:190px;padding:10px 12px;background:#FFF6DA;border:3px solid #1A0B3D;box-shadow:4px 4px 0 #1A0B3D,0 0 0 3px #F5C451,4px 4px 0 3px #1A0B3D;transform-origin:100% 100%;animation:bubblePop 3s ease-in-out infinite}
+.tail{position:absolute;right:14px;bottom:-14px;width:14px;height:14px;background:#FFF6DA;border-right:3px solid #1A0B3D;border-bottom:3px solid #1A0B3D;transform:skewX(30deg)}
+.say-box{position:relative;display:grid}
+.say{grid-area:1/1;font-family:'Silkscreen',monospace;font-size:11px;line-height:1.35;letter-spacing:.04em;color:#1A0B3D;text-transform:uppercase;opacity:0;animation:say 12s steps(1) infinite}
+.s1{animation-delay:0s}.s2{animation-delay:-9s}.s3{animation-delay:-6s}.s4{animation-delay:-3s}
+@keyframes say{0%{opacity:1}25%{opacity:0}100%{opacity:0}}
+@keyframes bubblePop{0%{transform:scale(.85);opacity:0}8%{transform:scale(1.06);opacity:1}14%,88%{transform:scale(1);opacity:1}100%{transform:scale(.9);opacity:0}}
+@media (max-width: 720px){.host{width:86px!important;bottom:-30px!important}.say-h{font-size:9px}.bubble{max-width:140px;padding:8px 10px}.say{font-size:9px}}
+@media (prefers-reduced-motion: reduce){.host-img,.host-shadow,.bubble{animation:none!important}.say{animation:none;opacity:0}.s1{opacity:1}}
+.tk-wrap{position:absolute;inset:0;pointer-events:none}
+.tk-hot{pointer-events:auto;position:absolute;left:3.5%;top:16.8%;width:93%;height:9.6%;border:0;padding:0;background:transparent;border-radius:10px;cursor:pointer}
+.tk-ring{position:absolute;left:-3px;top:calc(29% - 3px);width:41%;bottom:-3px;border-radius:12px;border:1.5px solid rgba(245,196,81,.85);box-shadow:0 0 16px rgba(245,196,81,.55);animation:tkPulse 2.2s ease-in-out infinite}
+@keyframes tkPulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+.tip-tap{display:none}@media (hover: none){.tip-hover{display:none}.tip-tap{display:inline}}
+.tk-tip{pointer-events:none;position:absolute;left:6px;top:100%;transform:translateY(6px);white-space:nowrap;padding:5px 10px;border-radius:999px;background:#F2B23A;color:#1A0B3D;font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 6px 18px rgba(242,178,58,.45);transition:opacity .25s ease}
+.tk-drop{position:absolute;left:5%;top:26.2%;width:76%;max-height:66%;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;outline:none;border-radius:12px;background:#131828;border:1px solid rgba(182,155,255,.45);box-shadow:0 0 0 4px rgba(10,6,28,.9),0 28px 60px rgba(0,0,0,.8);opacity:0;transform:translateY(-8px) scale(.98);transform-origin:20% 0;pointer-events:none;transition:opacity .2s ease,transform .32s cubic-bezier(.2,.8,.2,1);scrollbar-width:thin;scrollbar-color:rgba(182,155,255,.4) transparent}
+.tk-wrap:hover .tk-drop,.tk-wrap:focus-within .tk-drop{opacity:1;transform:none;pointer-events:auto}
+.tk-wrap:hover .tk-ring,.tk-wrap:focus-within .tk-ring{animation:none;opacity:1}
+.tk-wrap:hover .tk-tip,.tk-wrap:focus-within .tk-tip{opacity:0}
+.tk-wrap:hover{pointer-events:auto}
+.wg-visual:has(.tk-wrap:hover) .wg-note,.wg-visual:has(.tk-wrap:focus-within) .wg-note{opacity:0;transition:opacity .25s ease}
+.tk-drop:hover{pointer-events:auto}
+.tk-drop img{pointer-events:none}
+.tk-drop::-webkit-scrollbar{width:6px}.tk-drop::-webkit-scrollbar-thumb{background:rgba(182,155,255,.45);border-radius:6px}
+@media (prefers-reduced-motion: reduce){.tk-ring{animation:none;opacity:.8}}
+.gear{display:block}
+.g1{animation:orbSpin 90s linear infinite}.g2{animation:orbSpin 60s linear infinite reverse}.g3{animation:orbSpin 40s linear infinite}
+.casing{background:linear-gradient(150deg,#463E62 0%,#221B3A 22%,#120D24 60%,#1E1834 100%);border:1px solid rgba(245,196,81,.4);box-shadow:1px 1px 0 #2C2444,2px 2px 0 #28203F,3px 3px 0 #241C3A,4px 4px 0 #201834,5px 5px 0 #1C152F,6px 6px 0 #18122A,7px 7px 0 #150F25,8px 8px 0 #120C20,0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12)}
+.casing-main{box-shadow:1px 1px 0 #2C2444,2px 2px 0 #28203F,3px 3px 0 #241C3A,4px 4px 0 #201834,5px 5px 0 #1C152F,6px 6px 0 #18122A,7px 7px 0 #150F25,8px 8px 0 #120C20,9px 9px 0 #100A1C,10px 10px 0 #0E0918,0 60px 110px rgba(0,0,0,.65),0 0 70px rgba(123,77,255,.3),inset 0 1px 0 rgba(255,255,255,.14)}
+.screw{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F4E2B0,#9C7A32 55%,#4A3610);box-shadow:0 1px 1px rgba(0,0,0,.6)}
+.screw::after{content:"";position:absolute;left:2px;right:2px;top:4.5px;height:1px;background:rgba(40,25,5,.8);transform:rotate(35deg)}
+.pins{width:56%;height:12px;margin:6px auto 0;border-radius:0 0 6px 6px;background:repeating-linear-gradient(90deg,#F5C451 0 6px,rgba(245,196,81,0) 6px 11px);box-shadow:0 0 14px rgba(245,196,81,.55);opacity:.9}
+.led{animation:led 2.4s ease-in-out infinite}@keyframes led{0%,100%{opacity:1}50%{opacity:.45}}
+.casing-main span{white-space:nowrap}
+.wg-note{position:absolute;z-index:3;pointer-events:none;display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(14,6,40,.9);border:1px solid rgba(182,155,255,.3);font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#D9D0F5;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.wg-note .dot{width:6px;height:6px;border-radius:50%;background:#F5C451;box-shadow:0 0 8px #F5C451}
+.n1{left:0;top:36%}.n2{right:2%;bottom:96px}
+.nut svg polygon:first-child{transition:fill .3s ease}
+@media (max-width: 900px){.wg-visual{min-height:640px!important}}
+@media (max-width: 520px){.wg-visual{min-height:560px!important}.wg-mod{width:78%!important;transform:translateX(-50%) rotateY(-10deg) rotateX(6deg)!important}.wg-note{display:none!important}.casing-main>div:nth-of-type(1){padding:2px 18px 10px!important}.casing-main>div:nth-of-type(1)>span:last-child{display:none}.g1{width:320px;height:320px}}
+@media (prefers-reduced-motion: reduce){.gear,.led{animation:none!important}}
+@media (max-width: 900px){.wg-grid{grid-template-columns:1fr!important;padding:24px!important;gap:28px!important}.wg-visual{order:-1}}
+@media (max-width: 520px){.embed-code{font-size:11px!important}}
+.orb,.stars,.hz{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 calc(50% - 640px),#000 calc(50% + 640px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 calc(50% - 640px),#000 calc(50% + 640px),transparent 100%)}
+.orb-back{clip-path:inset(0 0 50% 0)}
+.eco-item{transition:transform .3s ease,border-color .3s ease,background .3s ease}
+.eco-gear{transition:transform .6s ease}.eco-widget:hover .eco-gear{transform:rotate(90deg)}
+.eco-item:hover{transform:translateY(-3px);border-color:rgba(245,196,81,.45)!important;background:linear-gradient(180deg,rgba(245,196,81,.1),rgba(255,255,255,.02))!important}
+@media (max-width: 1000px){.eco-products{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width: 560px){.eco-in{padding:12px!important}.eco-products{grid-template-columns:1fr!important;gap:8px!important}.eco-stats{flex-wrap:wrap;row-gap:12px}.eco-stat{padding:0 8px!important;flex:1 1 40%}.eco-sep:nth-of-type(2){display:none}.eco-stat span:first-child{font-size:17px!important}.eco-stat span:last-child{letter-spacing:.08em!important;font-size:9px!important}}
+.st{position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:transparent}
+.st2{width:3px;height:3px;animation:twinkle 6s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.35}50%{opacity:1}}
+.shard{position:absolute;z-index:1;height:auto;pointer-events:none;transform:translate(-50%,-50%) rotate(var(--r));animation:shardFloat var(--d) ease-in-out infinite;animation-delay:var(--dl)}
+.sh1{left:27%;top:26%;width:62px;--r:-18deg;--d:11s;--dl:0s;filter:blur(.4px) drop-shadow(0 10px 18px rgba(0,0,0,.45));opacity:.95}
+.sh2{left:21%;top:62%;width:34px;--r:24deg;--d:9s;--dl:-3s;filter:blur(2.2px);opacity:.6}
+.sh3{left:74%;top:34%;width:48px;--r:16deg;--d:13s;--dl:-6s;filter:blur(1px) drop-shadow(0 8px 14px rgba(0,0,0,.4));opacity:.85}
+.sh4{left:80%;top:68%;width:26px;--r:-30deg;--d:10s;--dl:-2s;filter:blur(3px);opacity:.5}
+.sh5{left:64%;top:14%;width:20px;--r:38deg;--d:12s;--dl:-8s;filter:blur(2.6px);opacity:.45}
+@keyframes shardFloat{0%,100%{translate:0 0}50%{translate:0 -14px}}
+@media (max-width: 720px){.sh1{left:34%;top:20%;width:34px}.sh2{left:32%;top:58%;width:22px}.sh3{left:67%;top:32%;width:30px}.sh4{left:69%;top:62%;width:18px}.sh5{left:60%;top:10%;width:14px}}
+@media (prefers-reduced-motion: reduce){.st2,.shard{animation:none!important}}
+.orb{position:absolute;left:50%;top:calc(100% + 70px);width:220vw;height:120vw;transform:translate(-50%,-50%);perspective:2600px;perspective-origin:50% 50%;pointer-events:none}
+.orb-back{z-index:0;clip-path:inset(0 0 50% 0)}
+.orb-front{z-index:2;clip-path:inset(50% 0 0 0)}
+.orb-tilt{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(80deg) rotateY(-3deg)}
+.orb-ring{position:absolute;border-radius:50%;--R:300px;width:calc(var(--R)*2);height:calc(var(--R)*2);left:calc(var(--R)*-1);top:calc(var(--R)*-1)}
+.r-halo{--R:min(46vw,520px);background:radial-gradient(closest-side,rgba(242,178,58,.12),rgba(123,77,255,.07) 55%,rgba(123,77,255,0) 72%)}
+.r-band{--R:min(50vw,600px);background:conic-gradient(from 0deg,rgba(245,196,81,0) 0deg,rgba(245,196,81,.32) 50deg,rgba(255,228,160,.5) 70deg,rgba(157,123,255,.22) 150deg,rgba(157,123,255,0) 210deg,rgba(157,123,255,.26) 280deg,rgba(245,196,81,.24) 330deg,rgba(245,196,81,0) 360deg);-webkit-mask:radial-gradient(closest-side,transparent 89%,#000 90.5%,#000 95.5%,transparent 97%);mask:radial-gradient(closest-side,transparent 89%,#000 90.5%,#000 95.5%,transparent 97%);filter:drop-shadow(0 0 14px rgba(245,196,81,.25));animation:orbSpin 110s linear infinite}
+.r-ticks{--R:min(54vw,650px);background:repeating-conic-gradient(rgba(233,224,255,.55) 0deg .35deg,transparent .35deg 4deg);-webkit-mask:radial-gradient(closest-side,transparent 94%,#000 95%,#000 98.5%,transparent 99.5%);mask:radial-gradient(closest-side,transparent 94%,#000 95%,#000 98.5%,transparent 99.5%);opacity:.35;animation:orbSpin 180s linear infinite reverse}
+.r-gold{--R:min(42vw,520px);border:1px solid rgba(255,226,150,.55);box-shadow:0 0 18px rgba(245,196,81,.28),inset 0 0 18px rgba(245,196,81,.14);animation:orbSpin 60s linear infinite}
+.orb-comet{position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,240,200,0) 0deg,rgba(255,240,200,0) 300deg,rgba(255,240,200,.95) 356deg,rgba(255,240,200,0) 360deg);-webkit-mask:radial-gradient(closest-side,transparent 96%,#000 97%,#000 100%);mask:radial-gradient(closest-side,transparent 96%,#000 97%,#000 100%);filter:blur(.6px) drop-shadow(0 0 8px rgba(255,220,140,.9))}
+.r-violet{--R:min(33vw,410px);background:conic-gradient(from 90deg,rgba(157,123,255,.05),rgba(182,155,255,.42) 90deg,rgba(157,123,255,.06) 200deg,rgba(182,155,255,.36) 300deg,rgba(157,123,255,.05));-webkit-mask:radial-gradient(closest-side,transparent 92%,#000 93.5%,#000 97.5%,transparent 99%);mask:radial-gradient(closest-side,transparent 92%,#000 93.5%,#000 97.5%,transparent 99%);filter:drop-shadow(0 0 12px rgba(157,123,255,.45));animation:orbSpin 75s linear infinite reverse}
+.r-inner{--R:min(22vw,280px);border:1px dashed rgba(245,196,81,.3);animation:orbSpin 90s linear infinite}
+.r-outer{--R:min(66vw,740px);border:1px solid rgba(182,155,255,.18);box-shadow:0 0 40px rgba(123,77,255,.12)}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+@media (max-width: 720px){.orb{top:calc(100% + 40px)}.r-halo{--R:62vw}.r-band{--R:66vw}.r-ticks{--R:72vw}.r-gold{--R:56vw}.r-violet{--R:44vw}.r-inner{--R:30vw}.r-outer{--R:90vw}.orb-tilt{transform:rotateX(76deg) rotateY(-3deg)!important}}
+@media (prefers-reduced-motion: reduce){.orb-ring{animation:none!important}}
+@media (max-width: 520px){
+.contact-card{padding:16px!important;gap:14px!important}
+.contact-med{width:48px!important;height:48px!important}
+.contact-med svg{width:22px;height:22px}
+.contact-arrow{display:none!important}
+.contact-val{font-size:22px!important}
+.contact-mail{font-size:14px!important;letter-spacing:0!important}
+}
+.nav-link{transition:color .25s ease,background .25s ease}
+.nav-links .nav-link::after{content:"";position:absolute;left:50%;bottom:6px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#F5C451;box-shadow:0 0 10px 2px rgba(245,196,81,.8);opacity:0;transform:scale(.3);transition:opacity .25s ease,transform .25s ease}
+.nav-links .nav-link:hover{color:#FFE09A!important}
+.nav-links .nav-link:hover::after,.nav-links .nav-link.active::after{opacity:1;transform:none}
+.nav-links .nav-link.active{color:#F5C451!important}
+.m-link:hover,.m-link.active{background:rgba(245,196,81,.1)}
+.icon-btn{transition:background .25s ease,border-color .25s ease}.icon-btn:hover{background:rgba(245,196,81,.14)!important;border-color:rgba(245,196,81,.6)!important}
+.hdr{transition:background .35s ease,box-shadow .35s ease}
+.hdr-wrap.scrolled .hdr{background:rgba(12,4,36,.85)!important;box-shadow:0 18px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05)!important}
+.nav-menu{display:none;position:static}
+.nav-menu>summary{list-style:none}
+.nav-menu>summary::-webkit-details-marker{display:none}
+.burger{position:relative;display:block;width:20px;height:14px}
+.burger i{position:absolute;left:0;height:2px;border-radius:2px;background:#F5C451;transition:transform .3s ease,opacity .3s ease,width .3s ease}
+.burger i:nth-child(1){top:0;width:20px}.burger i:nth-child(2){top:6px;width:14px}.burger i:nth-child(3){top:12px;width:20px}
+.nav-menu[open] .burger i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-menu[open] .burger i:nth-child(2){opacity:0}
+.nav-menu[open] .burger i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-menu[open] .m-panel{animation:mIn .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes mIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (max-width: 1060px){.nav-links{display:none!important}}
+@media (max-width: 760px){.nav-cta{display:none!important}.nav-menu{display:block}.nav-logo{height:36px!important}.hdr{padding:7px 7px 7px 14px!important}.hdr-wrap{padding:10px 10px 0!important}}
+@media (min-width: 761px) and (max-width: 1060px){.nav-menu{display:block}}
+.cr-float{animation:crFloat 7s ease-in-out infinite}
+@keyframes crFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.cr-pulse{animation:crPulse 4s ease-in-out infinite}
+@keyframes crPulse{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+.cr-orbit{transform-style:preserve-3d}
+.cr-o1{animation:crO1 18s linear infinite}.cr-o2{animation:crO2 13s linear infinite}
+@keyframes crO1{from{transform:rotateX(76deg) rotateZ(0deg)}to{transform:rotateX(76deg) rotateZ(360deg)}}
+@keyframes crO2{from{transform:rotateX(72deg) rotateZ(360deg)}to{transform:rotateX(72deg) rotateZ(0deg)}}
+.cr-dot{position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%}
+.cr-shine span{animation:crShine 6s ease-in-out infinite}
+@keyframes crShine{0%,55%{left:-60%}85%,100%{left:130%}}
+.cr-spark{position:absolute;width:4px;height:4px;border-radius:50%;background:#FFE09A;box-shadow:0 0 10px 2px rgba(245,196,81,.9);opacity:0;animation:crSpark 6.2s ease-out infinite}
+@keyframes crSpark{0%{opacity:0;transform:translateY(0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
+@media (max-width: 720px){.cr-stage{width:190vw!important;margin:6px 0 -22px!important}}
+@media (prefers-reduced-motion: reduce){.cr-float,.cr-pulse,.cr-o1,.cr-o2,.cr-shine span,.cr-spark{animation:none!important}.cr-spark{display:none}}
+@media (max-width: 720px){
+.ps-stage{aspect-ratio:1 / 1.12!important;margin-top:40px!important}
+.ps-oracle{left:0!important;top:9%!important;width:76%!important}
+.ps-repeg{left:3%!important;top:56%!important;width:64%!important;z-index:1!important}
+.ps-repeg-in{transform:rotateX(4deg) rotateZ(-2deg)!important}
+.ps-phone{left:auto!important;right:0!important;top:2%!important;width:37%!important}
+.bar-sep{display:none}
+.bar{flex-direction:column!important;align-items:stretch!important;gap:16px!important;padding:18px 14px!important}
+.bar-logos{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center}
+.bar-item{flex-direction:column!important;justify-content:center!important;gap:8px!important;height:auto!important;min-height:76px;padding:0 4px!important;text-align:center}
+.bar-item img{max-width:100%}
+.bar-item>span{align-items:center!important;text-align:center!important}
+.bar-item span[style*="Silkscreen"]{font-size:11px!important}
+.bar-item span[style*="Chakra"]{font-size:13px!important}
+.bar-stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);text-align:center!important}
+.bar-stats>div{align-items:center}
+.bar-stats>div>span:first-child{font-size:18px!important}
+}
+.fw-scroll{animation:fwScroll 16s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes fwScroll{0%,22%{transform:translate3d(0,0,0)}48%,70%{transform:translate3d(0,-38.4%,0)}92%,100%{transform:translate3d(0,0,0)}}
+.fw-scroll{will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.fw-view picture{display:block}
+@media (max-width: 720px){.ph-tilt,#frontier .tilt-l{transform:none!important}#frontier .tilt-l:hover,#frontier .tilt-l:active{transform:scale(1.1)!important;z-index:10!important}}
+@media (hover: none){.tilt-l,.tilt-r{cursor:pointer}}
+.fw-splash{animation:fwSplash 16s ease infinite}
+@keyframes fwSplash{0%,12%{opacity:1}18%,94%{opacity:0}100%{opacity:1}}
+@media (prefers-reduced-motion: reduce){.fw-scroll{animation:none}.fw-splash{animation:none;opacity:0}.fw-view{overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}.fw-view::-webkit-scrollbar{display:none}}
+.logo-pop{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card-hover:hover .logo-pop{transform:scale(1.07) translateY(-4px)}
+.lift{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease;transform-style:preserve-3d}
+.lift:hover{transform:translateY(-10px) rotateX(6deg);box-shadow:0 50px 80px rgba(0,0,0,.55),0 0 50px rgba(242,178,58,.18),inset 0 1px 0 rgba(245,196,81,.6)}
+.rays{animation:spin 160s linear infinite;-webkit-mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.5) 25%,transparent 55%);mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.5) 25%,transparent 55%)}
+@media (prefers-reduced-motion: reduce){.orbit-1,.orbit-2,.orbit-3,.coin,.core,.rays{animation:none}}
+</style>
+</head>
+<body>
+<div style="background: #0A0420; color: #F3EEFF; font-family: Manrope, system-ui, sans-serif; overflow: clip; position: relative">
+
+<!-- ambient grid -->
+<div aria-hidden="true" style="position: absolute; inset: 0; height: 1100px; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 64px 64px; pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; top: -260px; right: -200px; width: 820px; height: 820px; border-radius: 50%; background: radial-gradient(circle, rgba(123,77,255,.38), rgba(10,4,32,0) 65%); pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; top: 380px; left: -300px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(242,178,58,.10), rgba(10,4,32,0) 65%); pointer-events: none"></div>
+
+<!-- NAV -->
+<div class="hdr-wrap" style="position: sticky; top: 0; z-index: 40; padding: 14px 16px 0">
+<header class="hdr" style="position: relative; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 8px 8px 20px; border-radius: 20px; background: rgba(16,6,46,.55); border: 1px solid rgba(182,155,255,.16); box-shadow: 0 18px 50px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px)">
+<span aria-hidden="true" style="position: absolute; left: 18%; right: 18%; top: -1px; height: 1px; background: linear-gradient(90deg, rgba(245,196,81,0), rgba(245,196,81,.9), rgba(245,196,81,0))"></span>
+<a href="#top" aria-label="Delfos Hub home" style="display: flex; align-items: center; flex: none"><img class="nav-logo" src="assets/delfos-logo.webp" alt="Delfos Hub" style="height: 42px; width: auto"></a>
+<nav class="nav-links" aria-label="Main" style="display: flex; align-items: center; gap: 4px">
+<a class="nav-link" data-sec="frontier" href="#frontier" style="position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: #D9D0F5; font-size: 14px; font-weight: 600; letter-spacing: 0.02em">Frontier</a>
+<a class="nav-link" data-sec="oracle" href="#oracle" style="position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: #D9D0F5; font-size: 14px; font-weight: 600; letter-spacing: 0.02em">Terra Oracle</a>
+<a class="nav-link" data-sec="repeg" href="#repeg" style="position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: #D9D0F5; font-size: 14px; font-weight: 600; letter-spacing: 0.02em">Repeg Club</a>
+<a class="nav-link" data-sec="widgets" href="#widgets" style="position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: #D9D0F5; font-size: 14px; font-weight: 600; letter-spacing: 0.02em">Widgets</a>
+<a class="nav-link" data-sec="principles" href="#principles" style="position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: #D9D0F5; font-size: 14px; font-weight: 600; letter-spacing: 0.02em">Principles</a>
+<a class="nav-link" data-sec="contact" href="#contact" style="position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; color: #D9D0F5; font-size: 14px; font-weight: 600; letter-spacing: 0.02em">Contact</a>
+</nav>
+<div class="nav-cta" style="display: flex; align-items: center; gap: 8px; flex: none">
+<a href="https://t.me/DelfosHub" target="_blank" rel="noopener" aria-label="Delfos Hub on Telegram" class="icon-btn" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 14px; border: 1px solid rgba(245,196,81,.3); background: rgba(24,10,64,.6)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F5C451" d="M21.9 4.3c.3-1.2-.9-2.1-2-1.7L2.8 9.2c-1.2.5-1.2 2.2.1 2.6l4.3 1.4 1.7 5.3c.3 1 1.6 1.3 2.3.5l2.4-2.4 4.4 3.2c.9.7 2.2.2 2.5-.9zM9.6 14.2l8-7.2-9.6 5.9z"></path></svg></a>
+<a class="btn-primary" href="#products" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 14px; background: #F2B23A; color: #1A0B3D; font-weight: 700; font-size: 14px; box-shadow: 0 8px 26px rgba(242,178,58,.3)">Explore products <span aria-hidden="true">→</span></a>
+</div>
+<details class="nav-menu">
+<summary aria-label="Open menu" style="display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 14px; background: rgba(24,10,64,.7); border: 1px solid rgba(245,196,81,.35); cursor: pointer">
+<span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+</summary>
+<div class="m-panel" style="position: absolute; left: 0; right: 0; top: calc(100% + 10px); padding: 12px; border-radius: 22px; background: rgba(16,6,46,.97); border: 1px solid rgba(245,196,81,.28); box-shadow: 0 30px 70px rgba(0,0,0,.65); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px)">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<a class="nav-link m-link" data-sec="frontier" href="#frontier" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 18px; border-radius: 14px; color: #F3EEFF; font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase"><span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F5C451; margin-right: 12px">01</span>Frontier</span><span aria-hidden="true" style="color: #F5C451">→</span></a>
+<a class="nav-link m-link" data-sec="oracle" href="#oracle" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 18px; border-radius: 14px; color: #F3EEFF; font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase"><span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F5C451; margin-right: 12px">02</span>Terra Oracle</span><span aria-hidden="true" style="color: #F5C451">→</span></a>
+<a class="nav-link m-link" data-sec="repeg" href="#repeg" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 18px; border-radius: 14px; color: #F3EEFF; font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase"><span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F5C451; margin-right: 12px">03</span>Repeg Club</span><span aria-hidden="true" style="color: #F5C451">→</span></a>
+<a class="nav-link m-link" data-sec="widgets" href="#widgets" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 18px; border-radius: 14px; color: #F3EEFF; font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase"><span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F5C451; margin-right: 12px">04</span>Widgets</span><span aria-hidden="true" style="color: #F5C451">→</span></a>
+<a class="nav-link m-link" data-sec="principles" href="#principles" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 18px; border-radius: 14px; color: #F3EEFF; font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase"><span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F5C451; margin-right: 12px">05</span>Principles</span><span aria-hidden="true" style="color: #F5C451">→</span></a>
+<a class="nav-link m-link" data-sec="contact" href="#contact" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 18px; border-radius: 14px; color: #F3EEFF; font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase"><span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #F5C451; margin-right: 12px">06</span>Contact</span><span aria-hidden="true" style="color: #F5C451">→</span></a>
+</div>
+<a class="btn-primary" href="#products" style="margin-top: 10px; display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 14px; background: #F2B23A; color: #1A0B3D; font-weight: 700; font-size: 16px">Explore products</a>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
+<a href="https://t.me/DelfosHub" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; border-radius: 12px; border: 1px solid rgba(245,196,81,.3); color: #F5C451; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F5C451" d="M21.9 4.3c.3-1.2-.9-2.1-2-1.7L2.8 9.2c-1.2.5-1.2 2.2.1 2.6l4.3 1.4 1.7 5.3c.3 1 1.6 1.3 2.3.5l2.4-2.4 4.4 3.2c.9.7 2.2.2 2.5-.9zM9.6 14.2l8-7.2-9.6 5.9z"></path></svg>@DelfosHub</a>
+<a href="mailto:delfoshub.team@gmail.com" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; border-radius: 12px; border: 1px solid rgba(182,155,255,.3); color: #D9D0F5; font-size: 14px; font-weight: 600">Email us</a>
+</div>
+</div>
+</details>
+</header>
+</div>
+
+<!-- HERO -->
+<section id="top" style="position: relative; padding: 24px 24px 40px; overflow: hidden">
+
+<!-- sky: rays, halo, planet horizon -->
+<div aria-hidden="true" style="position: absolute; left: 50%; top: -140px; width: 1500px; height: 1500px; margin-left: -750px; pointer-events: none">
+<div class="rays" style="position: absolute; inset: 0; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(245,196,81,.13) 0deg 2deg, rgba(245,196,81,0) 2deg 12deg)"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 40px; width: 1400px; height: 700px; margin-left: -700px; border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, rgba(123,77,255,.26), rgba(74,31,184,.10) 40%, rgba(10,4,32,0) 72%); pointer-events: none"></div>
+
+<div aria-hidden="true" class="stars" style="position: absolute; left: 50%; top: 0; width: 1900px; height: 1200px; margin-left: -950px; pointer-events: none">
+<span class="st st1" style="box-shadow: 663px 308px rgba(233,224,255,.45),1333px 98px rgba(255,255,255,.55),1681px 1097px rgba(255,255,255,.55),748px 1193px rgba(255,255,255,.55),1863px 1039px rgba(255,255,255,.55),76px 176px rgba(233,224,255,.45),856px 143px rgba(255,255,255,.55),185px 1128px rgba(233,224,255,.45),121px 1158px rgba(255,255,255,.55),457px 1193px rgba(255,255,255,.55),1181px 1199px rgba(233,224,255,.45),101px 452px rgba(255,255,255,.55),1140px 272px rgba(233,224,255,.45),858px 295px rgba(255,226,150,.5),241px 1169px rgba(233,224,255,.45),1147px 370px rgba(255,255,255,.55),1191px 1169px rgba(255,226,150,.5),384px 762px rgba(255,255,255,.55),1121px 128px rgba(255,226,150,.5),122px 421px rgba(233,224,255,.45),1393px 1088px rgba(233,224,255,.45),1591px 643px rgba(233,224,255,.45),1199px 928px rgba(233,224,255,.45),613px 508px rgba(255,255,255,.55),1431px 499px rgba(255,255,255,.55),1176px 614px rgba(255,226,150,.5),1013px 703px rgba(255,226,150,.5),919px 589px rgba(255,226,150,.5),149px 241px rgba(255,226,150,.5),856px 337px rgba(233,224,255,.45),311px 1001px rgba(233,224,255,.45),80px 158px rgba(255,226,150,.5),1173px 642px rgba(233,224,255,.45),1423px 717px rgba(255,226,150,.5),1017px 1187px rgba(233,224,255,.45),140px 191px rgba(233,224,255,.45),970px 133px rgba(255,255,255,.55),1497px 634px rgba(255,226,150,.5),1183px 912px rgba(233,224,255,.45),1467px 790px rgba(255,226,150,.5),710px 46px rgba(233,224,255,.45),727px 344px rgba(255,226,150,.5),239px 1011px rgba(255,255,255,.55),446px 588px rgba(255,255,255,.55),1512px 507px rgba(233,224,255,.45),800px 1016px rgba(255,255,255,.55),340px 919px rgba(233,224,255,.45),1125px 569px rgba(255,255,255,.55),1677px 881px rgba(255,226,150,.5),570px 850px rgba(233,224,255,.45),1398px 779px rgba(255,255,255,.55),309px 169px rgba(255,255,255,.55),309px 475px rgba(255,226,150,.5),477px 24px rgba(233,224,255,.45),1702px 373px rgba(233,224,255,.45),577px 8px rgba(255,255,255,.55),858px 1094px rgba(233,224,255,.45),1248px 1159px rgba(233,224,255,.45),257px 1055px rgba(255,226,150,.5),1341px 110px rgba(233,224,255,.45),1842px 1145px rgba(233,224,255,.45),815px 817px rgba(233,224,255,.45),212px 986px rgba(255,226,150,.5),820px 127px rgba(255,255,255,.55),137px 427px rgba(233,224,255,.45),332px 225px rgba(233,224,255,.45),1230px 107px rgba(255,255,255,.55),0px 1160px rgba(255,255,255,.55),1098px 207px rgba(233,224,255,.45),1256px 52px rgba(255,255,255,.55),1790px 425px rgba(255,226,150,.5),770px 304px rgba(255,226,150,.5),516px 711px rgba(255,226,150,.5),745px 971px rgba(255,255,255,.55),236px 999px rgba(233,224,255,.45),983px 990px rgba(233,224,255,.45),175px 295px rgba(255,255,255,.55),1535px 701px rgba(255,226,150,.5),542px 980px rgba(255,226,150,.5),330px 1057px rgba(255,255,255,.55),420px 1081px rgba(233,224,255,.45),300px 1112px rgba(255,255,255,.55),1552px 1081px rgba(233,224,255,.45),1316px 186px rgba(255,226,150,.5),1731px 534px rgba(255,226,150,.5),751px 342px rgba(233,224,255,.45),1580px 456px rgba(255,226,150,.5),1109px 1029px rgba(233,224,255,.45),1303px 456px rgba(255,226,150,.5),1661px 399px rgba(255,255,255,.55)"></span>
+<span class="st st2" style="box-shadow: 1675px 820px rgba(255,255,255,.8),409px 1060px rgba(255,226,150,.75),728px 59px rgba(255,255,255,.8),1618px 572px rgba(255,226,150,.75),530px 396px rgba(255,226,150,.75),915px 715px rgba(255,226,150,.75),164px 451px rgba(255,255,255,.8),464px 962px rgba(255,255,255,.8),691px 418px rgba(255,226,150,.75),1278px 3px rgba(255,226,150,.75),1862px 704px rgba(255,255,255,.8),1709px 245px rgba(255,226,150,.75),1602px 408px rgba(255,226,150,.75),1820px 365px rgba(255,226,150,.75),1616px 680px rgba(255,255,255,.8),1640px 810px rgba(255,226,150,.75),822px 173px rgba(255,255,255,.8),348px 260px rgba(255,255,255,.8),309px 953px rgba(255,255,255,.8),1252px 971px rgba(255,226,150,.75),319px 1123px rgba(255,255,255,.8),43px 29px rgba(255,255,255,.8),1078px 285px rgba(255,226,150,.75),1785px 398px rgba(255,255,255,.8),57px 515px rgba(255,255,255,.8),599px 1026px rgba(255,255,255,.8),1564px 667px rgba(255,226,150,.75),1114px 858px rgba(255,255,255,.8),124px 724px rgba(255,226,150,.75),1356px 1194px rgba(255,226,150,.75),1693px 1027px rgba(255,255,255,.8),1089px 310px rgba(255,255,255,.8),1787px 901px rgba(255,255,255,.8),1246px 8px rgba(255,255,255,.8),352px 289px rgba(255,226,150,.75),1267px 246px rgba(255,255,255,.8),667px 1061px rgba(255,226,150,.75),1606px 217px rgba(255,255,255,.8),508px 391px rgba(255,226,150,.75),86px 200px rgba(255,226,150,.75)"></span>
+</div>
+<div style="position: relative; max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center">
+
+<!-- the crystal -->
+<div class="cr-stage" style="position: relative; width: min(1500px, 100vw); margin: -6px 0 -40px">
+<div class="orb orb-back" aria-hidden="true">
+<div class="orb-tilt">
+<div class="orb-ring r-halo"></div>
+<div class="orb-ring r-band"></div>
+<div class="orb-ring r-ticks"></div>
+<div class="orb-ring r-gold"><span class="orb-comet"></span></div>
+<div class="orb-ring r-violet"></div>
+<div class="orb-ring r-inner"></div>
+<div class="orb-ring r-outer"></div>
+</div>
+</div>
+<svg class="cr-svg" viewBox="0 0 1600 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position: relative; z-index: 1; display: block; width: 100%; height: auto; overflow: visible">
+<defs>
+<radialGradient id="crHalo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F5C451" stop-opacity=".42"></stop><stop offset=".35" stop-color="#B07A2A" stop-opacity=".16"></stop><stop offset="1" stop-color="#7B4DFF" stop-opacity="0"></stop></radialGradient>
+<radialGradient id="crDome" cx="50%" cy="100%" r="100%"><stop offset="0" stop-color="#7B4DFF" stop-opacity=".22"></stop><stop offset=".7" stop-color="#4A1FB8" stop-opacity=".06"></stop><stop offset="1" stop-color="#4A1FB8" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="ringGold" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#F5C451" stop-opacity="0"></stop><stop offset=".18" stop-color="#F5C451" stop-opacity=".85"></stop><stop offset=".5" stop-color="#FFE7A6" stop-opacity="1"></stop><stop offset=".82" stop-color="#F5C451" stop-opacity=".85"></stop><stop offset="1" stop-color="#F5C451" stop-opacity="0"></stop></linearGradient>
+<linearGradient id="ringViolet" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#9D7BFF" stop-opacity="0"></stop><stop offset=".2" stop-color="#9D7BFF" stop-opacity=".9"></stop><stop offset=".5" stop-color="#D9CCFF" stop-opacity="1"></stop><stop offset=".8" stop-color="#9D7BFF" stop-opacity=".9"></stop><stop offset="1" stop-color="#9D7BFF" stop-opacity="0"></stop></linearGradient>
+<linearGradient id="fA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1C2"></stop><stop offset="1" stop-color="#F2B23A"></stop></linearGradient>
+<linearGradient id="fB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD978"></stop><stop offset="1" stop-color="#B9740F"></stop></linearGradient>
+<linearGradient id="fC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9A43A"></stop><stop offset="1" stop-color="#7A4507"></stop></linearGradient>
+<linearGradient id="fD" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8E5410"></stop><stop offset="1" stop-color="#E2A23C"></stop></linearGradient>
+<linearGradient id="fE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE6A0"></stop><stop offset="1" stop-color="#C98418"></stop></linearGradient>
+<radialGradient id="core" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFFBEA"></stop><stop offset=".3" stop-color="#FFE08A" stop-opacity=".95"></stop><stop offset=".7" stop-color="#F2B23A" stop-opacity=".35"></stop><stop offset="1" stop-color="#F2B23A" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7A6" stop-opacity=".9"></stop><stop offset="1" stop-color="#FFE7A6" stop-opacity="0"></stop></linearGradient>
+<linearGradient id="domeStroke" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B69BFF" stop-opacity=".45"></stop><stop offset="1" stop-color="#B69BFF" stop-opacity="0"></stop></linearGradient>
+<radialGradient id="crDome2" cx="50%" cy="45%" r="50%"><stop offset="0" stop-color="#7B4DFF" stop-opacity=".2"></stop><stop offset="1" stop-color="#7B4DFF" stop-opacity="0"></stop></radialGradient>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"></feGaussianBlur><feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+<filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"></feGaussianBlur></filter>
+<filter id="spark" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter>
+</defs>
+
+
+<!-- halo -->
+<ellipse cx="800" cy="300" rx="260" ry="190" fill="url(#crHalo)" opacity=".7"></ellipse>
+
+
+<!-- crystal (3D render) -->
+<image href="assets/gem3d.webp" x="634" y="28" width="332" height="480" preserveAspectRatio="xMidYMid meet"></image>
+
+
+<!-- beam and base -->
+<ellipse cx="800" cy="492" rx="70" ry="16" fill="#FFE7A6" opacity=".45" filter="url(#soft)"></ellipse>
+<ellipse cx="800" cy="498" rx="26" ry="6" fill="#FFF6DA" opacity=".55" filter="url(#spark)"></ellipse>
+<g fill="none">
+<ellipse cx="800" cy="500" rx="190" ry="26" stroke="#9D7BFF" stroke-opacity=".55" stroke-width="3" filter="url(#glow)"></ellipse>
+<ellipse cx="800" cy="500" rx="130" ry="18" stroke="#F5C451" stroke-opacity=".8" stroke-width="2" filter="url(#glow)"></ellipse>
+<ellipse cx="800" cy="500" rx="80" ry="11" stroke="#FFE7A6" stroke-opacity=".9" stroke-width="1.8"></ellipse>
+<ellipse cx="800" cy="500" rx="36" ry="5" stroke="#FFF6DA" stroke-width="1.5"></ellipse>
+</g>
+<ellipse cx="800" cy="500" rx="120" ry="14" fill="#F5C451" opacity=".35" filter="url(#soft)"></ellipse>
+
+</svg>
+<img class="shard sh1" src="assets/gem3d.webp" alt="" aria-hidden="true">
+<img class="shard sh2" src="assets/gem3d.webp" alt="" aria-hidden="true">
+<img class="shard sh3" src="assets/gem3d.webp" alt="" aria-hidden="true">
+<img class="shard sh4" src="assets/gem3d.webp" alt="" aria-hidden="true">
+<img class="shard sh5" src="assets/gem3d.webp" alt="" aria-hidden="true">
+<div class="orb orb-front" aria-hidden="true">
+<div class="orb-tilt">
+<div class="orb-ring r-halo"></div>
+<div class="orb-ring r-band"></div>
+<div class="orb-ring r-ticks"></div>
+<div class="orb-ring r-gold"><span class="orb-comet"></span></div>
+<div class="orb-ring r-violet"></div>
+<div class="orb-ring r-inner"></div>
+<div class="orb-ring r-outer"></div>
+</div>
+</div>
+</div>
+
+<div style="position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border: 1px solid rgba(245,196,81,.45); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.16em; color: #F5C451; background: rgba(20,8,52,.85); box-shadow: 0 0 30px rgba(242,178,58,.25); backdrop-filter: blur(6px)">
+<span style="width: 7px; height: 7px; border-radius: 50%; background: #F2B23A; box-shadow: 0 0 12px #F2B23A"></span>
+WEB3 STUDIO · TERRA CLASSIC
+</div>
+
+<h1 style="position: relative; z-index: 3; margin: 22px 0 0; max-width: 980px; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: clamp(38px, 6vw, 84px); line-height: 1; letter-spacing: 0.01em">We see what <span style="color: #F2B23A; text-shadow: 0 0 40px rgba(242,178,58,.45)">Terra Classic</span> needs next</h1>
+<p style="position: relative; z-index: 3; margin: 22px 0 0; max-width: 620px; font-size: 19px; line-height: 1.6; color: #C6BCEA">Delfos Hub builds the products people use every day on Terra Classic: a wallet in your pocket, an oracle that rewards knowledge, and a fair that brings USTC back to its peg.</p>
+<div style="position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 32px">
+<a class="btn-primary" href="#products" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 14px; background: #F2B23A; color: #1A0B3D; font-weight: 700; font-size: 16px; box-shadow: 0 10px 40px rgba(242,178,58,.35)">See our products</a>
+<a class="btn-ghost" href="#contact" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 14px; border: 1px solid rgba(255,255,255,.22); background: rgba(20,8,52,.5); color: #F3EEFF; font-weight: 600; font-size: 16px">Partner with us</a>
+</div>
+
+<div aria-hidden="true" style="position: relative; width: 100%; height: 0">
+<div aria-hidden="true" class="hz" style="position: absolute; left: 50%; top: 14px; width: 2400px; height: 2400px; margin-left: -1200px; border-radius: 50%; background: radial-gradient(circle at 50% 0%, #1E0A55 0%, #0A0420 30%); box-shadow: 0 -2px 0 rgba(245,196,81,.55), 0 -30px 90px rgba(242,178,58,.28), 0 -120px 200px rgba(123,77,255,.35); pointer-events: none"></div>
+</div>
+<!-- product stage: real interfaces in 3D -->
+<div class="stage ps-stage" aria-label="Frontier, Terra Oracle and Repeg Club interfaces" role="img" style="position: relative; width: 100%; max-width: 1180px; aspect-ratio: 16 / 9; margin-top: 56px; perspective: 1800px">
+<!-- Repeg, left back -->
+<div class="float-b ps-repeg" style="position: absolute; left: 0; top: 34%; width: 41%; z-index: 3">
+<div class="ps-repeg-in" style="transform: rotateY(8deg) rotateX(2deg); border-radius: 12px; overflow: hidden; border: 1px solid rgba(245,196,81,.4); box-shadow: 0 40px 80px rgba(0,0,0,.65), 0 0 50px rgba(242,178,58,.15); ">
+<div style="display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #19150C"><span style="width: 9px; height: 9px; border-radius: 50%; background: #FF6B6B"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #F4C35A"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #4ADE80"></span><span style="margin-left: 10px; padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,.06); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A699D4">repegclub.com</span></div>
+<img class="shot" src="assets/repeg-home.webp" alt="">
+</div>
+</div>
+<!-- Oracle, center -->
+<div class="float-a ps-oracle" style="position: absolute; left: 20%; top: 0; width: 58%; z-index: 2">
+<div style="transform: rotateX(6deg); border-radius: 14px; overflow: hidden; border: 1px solid rgba(182,155,255,.5); box-shadow: 0 60px 120px rgba(0,0,0,.7), 0 0 80px rgba(123,77,255,.35)">
+<div style="display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #14122A"><span style="width: 9px; height: 9px; border-radius: 50%; background: #FF6B6B"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #F4C35A"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #4ADE80"></span><span style="margin-left: 10px; padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,.06); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A699D4">terraoracle.io</span></div>
+<img class="shot" src="assets/oracle-home.webp" alt="">
+</div>
+</div>
+<!-- Frontier phone, in front, overlapping the browser -->
+<div class="float-c ps-phone" style="position: absolute; left: 73%; top: 3%; width: 21%; z-index: 3; container-type: inline-size">
+<div class="ph-tilt" style="transform: rotateY(-12deg) rotateX(3deg)">
+<div style="position: relative; border-radius: 13cqw; padding: 1.1cqw; background: linear-gradient(150deg, #E4E0F2 0%, #6E6888 16%, #2B2740 46%, #1A1728 62%, #9A94B4 86%, #3C3852 100%); box-shadow: 0 60px 110px rgba(0,0,0,.7), 0 0 70px rgba(59,227,255,.16)">
+<span aria-hidden="true" style="position: absolute; left: -1cqw; top: 22%; width: 1cqw; height: 9%; border-radius: 2px 0 0 2px; background: #5E5878"></span>
+<span aria-hidden="true" style="position: absolute; right: -1cqw; top: 26%; width: 1cqw; height: 14%; border-radius: 0 2px 2px 0; background: #5E5878"></span>
+<div style="border-radius: 12cqw; padding: 1.8cqw; background: #050409">
+<div style="position: relative; border-radius: 10cqw; overflow: hidden; background: #0B0E1A">
+<div style="position: relative; width: 100%; aspect-ratio: 1290 / 2690; background: #0B0E1A">
+<div class="fw-view" style="position: absolute; left: 0; right: 0; top: 14.796%; height: 79.07%; overflow: hidden"><picture><source media="(max-width: 720px)" srcset="assets/frontier-content-m.webp"><img class="shot fw-scroll" src="assets/frontier-content.webp" alt=""></picture></div>
+<img src="assets/frontier-header.webp" alt="" style="position: absolute; left: 0; top: 0; width: 100%; height: 14.796%; display: block">
+<img src="assets/frontier-nav.webp" alt="" style="position: absolute; left: 0; top: 93.866%; width: 100%; height: 6.134%; display: block">
+<img class="fw-splash" src="assets/frontier-splash.webp" alt="" style="position: absolute; left: 0; top: 14.796%; width: 100%; height: 85.204%; display: block">
+</div>
+<span aria-hidden="true" style="position: absolute; left: 50%; top: 2.6cqw; width: 26cqw; height: 7.5cqw; margin-left: -13cqw; border-radius: 999px; background: #000"></span>
+<span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%)"></span>
+</div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 6%; right: 6%; bottom: -5%; height: 8%; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,.65), rgba(0,0,0,0) 70%); filter: blur(6px); z-index: -1"></div>
+</div>
+<!-- floor reflection glow -->
+<div aria-hidden="true" style="position: absolute; left: 10%; right: 10%; bottom: -6%; height: 90px; border-radius: 50%; background: radial-gradient(ellipse, rgba(242,178,58,.28), rgba(123,77,255,.15) 45%, rgba(10,4,32,0) 72%); filter: blur(8px)"></div>
+</div>
+
+<!-- ecosystem strip -->
+<div class="eco-bar" style="position: relative; z-index: 4; margin-top: 40px; width: 100%; max-width: 1180px; padding: 1px; border-radius: 26px; background: linear-gradient(120deg, rgba(245,196,81,.55), rgba(182,155,255,.25) 35%, rgba(182,155,255,.12) 65%, rgba(245,196,81,.45)); box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 60px rgba(123,77,255,.18)">
+<div class="eco-in" style="display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 16px 18px; border-radius: 25px; background: linear-gradient(180deg, rgba(28,12,72,.92), rgba(14,5,40,.94)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
+<span aria-hidden="true" style="position: absolute; left: 50%; top: 0; width: 40%; height: 1px; margin-left: -20%; background: linear-gradient(90deg, rgba(255,230,160,0), rgba(255,230,160,.95), rgba(255,230,160,0))"></span>
+<div class="eco-products" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+<a class="eco-item" href="#frontier" style="display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.07); color: #F3EEFF; min-width: 0">
+<span style="flex: none; width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 40% 30%, #2A1460, #0E0530); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 0 22px rgba(59,227,255,.22)"><img src="assets/frontier-spike.webp" alt="" style="height: 32px; width: auto"></span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; text-align: left">
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; line-height: 1; white-space: nowrap">FRONTIER</span>
+<span style="font-size: 12px; color: #A699D4; white-space: nowrap">Wallet · Telegram</span>
+</span>
+</a>
+<a class="eco-item" href="#oracle" style="display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.07); color: #F3EEFF; min-width: 0">
+<span style="flex: none; width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 40% 30%, #2A1460, #0E0530); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 0 22px rgba(123,77,255,.35)"><img src="assets/oracle-logo.webp" alt="" style="width: 32px; height: 32px; object-fit: contain"></span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; text-align: left">
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; line-height: 1; white-space: nowrap">TERRA <span style="color: #22D3EE">ORACLE</span></span>
+<span style="font-size: 12px; color: #A699D4; white-space: nowrap">dApp · Q&amp;A, markets</span>
+</span>
+</a>
+<a class="eco-item" href="#repeg" style="display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.07); color: #F3EEFF; min-width: 0">
+<span style="flex: none; width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 40% 30%, #2A1460, #0E0530); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 0 22px rgba(242,178,58,.25)"><img src="assets/repeg-logo.webp" alt="" style="width: 36px; height: auto"></span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; text-align: left">
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; line-height: 1; white-space: nowrap"><span style="color: #F5C451">REPEG CLUB</span></span>
+<span style="font-size: 12px; color: #A699D4; white-space: nowrap">Fair · USTC repeg</span>
+</span>
+</a>
+<a class="eco-item eco-widget" href="#widgets" style="display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 16px; background: linear-gradient(180deg, rgba(245,196,81,.08), rgba(245,196,81,.02)); border: 1px dashed rgba(245,196,81,.45); color: #F3EEFF; min-width: 0">
+<span style="flex: none; width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 40% 30%, #2A1460, #0E0530); border: 1px solid rgba(245,196,81,.3); box-shadow: 0 0 22px rgba(242,178,58,.25)"><span class="eco-gear" style="display: flex"><svg viewBox="-16 -16 32 32" width="30" height="30" aria-hidden="true"><path d="M11.5,0.0 L13.8,2.2 L13.3,4.3 L10.2,5.2 L9.3,6.8 L9.9,9.9 L8.2,11.3 L5.2,10.2 L3.6,10.9 L2.2,13.8 L0.0,14.0 L-1.8,11.4 L-3.6,10.9 L-6.4,12.5 L-8.2,11.3 L-8.1,8.1 L-9.3,6.8 L-12.5,6.4 L-13.3,4.3 L-11.4,1.8 L-11.5,0.0 L-13.8,-2.2 L-13.3,-4.3 L-10.2,-5.2 L-9.3,-6.8 L-9.9,-9.9 L-8.2,-11.3 L-5.2,-10.2 L-3.6,-10.9 L-2.2,-13.8 L-0.0,-14.0 L1.8,-11.4 L3.6,-10.9 L6.4,-12.5 L8.2,-11.3 L8.1,-8.1 L9.3,-6.8 L12.5,-6.4 L13.3,-4.3 L11.4,-1.8 Z M4.5,0 A4.5,4.5 0 1 0 -4.5,0 A4.5,4.5 0 1 0 4.5,0 Z" fill="rgba(245,196,81,.18)" fill-rule="evenodd" stroke="#F5C451" stroke-width="1.4"></path></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; text-align: left">
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; line-height: 1; white-space: nowrap">P2P <span style="color: #F5C451">WIDGET</span></span>
+<span style="font-size: 12px; color: #A699D4; white-space: nowrap">Embed · on-chain OTC</span>
+</span>
+</a>
+</div>
+<div class="eco-stats" style="display: flex; align-items: center; justify-content: center; width: 100%; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.07)">
+<div class="eco-stat" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 22px"><span style="font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; color: #F5C451; text-shadow: 0 0 22px rgba(242,178,58,.45)">3</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A699D4; white-space: nowrap">products</span></div>
+<span class="eco-sep" aria-hidden="true" style="width: 1px; height: 34px; background: linear-gradient(180deg, rgba(245,196,81,0), rgba(245,196,81,.45), rgba(245,196,81,0))"></span>
+<div class="eco-stat" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 22px"><span style="font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; color: #F5C451; text-shadow: 0 0 22px rgba(242,178,58,.45)">1</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A699D4; white-space: nowrap">widget</span></div>
+<span class="eco-sep" aria-hidden="true" style="width: 1px; height: 34px; background: linear-gradient(180deg, rgba(245,196,81,0), rgba(245,196,81,.45), rgba(245,196,81,0))"></span>
+<div class="eco-stat" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 22px"><span style="font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; color: #F5C451; text-shadow: 0 0 22px rgba(242,178,58,.45)">100%</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A699D4; white-space: nowrap">non-custodial</span></div>
+<span class="eco-sep" aria-hidden="true" style="width: 1px; height: 34px; background: linear-gradient(180deg, rgba(245,196,81,0), rgba(245,196,81,.45), rgba(245,196,81,0))"></span>
+<div class="eco-stat" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 22px"><span style="font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; color: #F5C451; text-shadow: 0 0 22px rgba(242,178,58,.45)">columbus-5</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A699D4; white-space: nowrap">mainnet</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PRODUCTS STRIP -->
+<section id="products" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 96px 32px 64px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 36px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #A699D4">01 / ECOSYSTEM</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.01em">Three products. One chain.</h2>
+</div>
+<p style="margin: 0; max-width: 420px; color: #C6BCEA; line-height: 1.6; font-size: 16px">Each product stands on its own, and together they cover how people hold, use and earn on Terra Classic.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
+<a class="card-hover" href="#frontier" style="display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 24px; background: linear-gradient(180deg, #170A40, #0E0530); border: 1px solid rgba(255,255,255,.08); color: #F3EEFF; overflow: hidden">
+<div style="position: relative; height: 170px; margin: -12px -12px 6px; border-radius: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 60%, rgba(59,227,255,.28), rgba(14,5,48,0) 70%), #0C0428; border: 1px solid rgba(59,227,255,.25)">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: radial-gradient(ellipse, #000, transparent 75%); mask-image: radial-gradient(ellipse, #000, transparent 75%)"></div>
+<img class="logo-pop" src="assets/frontier-wordmark.webp" alt="Frontier" style="position: relative; width: 78%; height: auto; filter: drop-shadow(0 0 22px rgba(59,227,255,.45)) drop-shadow(0 0 40px rgba(168,85,247,.3))">
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #9DF1FF">WALLET</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 24px; font-weight: 700">Frontier</span>
+<span style="color: #C6BCEA; line-height: 1.6; font-size: 15px">A non-custodial Terra Classic wallet that lives inside Telegram. Send, swap, stake and vote in a few taps.</span>
+<span style="margin-top: auto; color: #3BE3FF; font-weight: 600; font-size: 15px">Learn more →</span>
+</a>
+<a class="card-hover" href="#oracle" style="display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 24px; background: linear-gradient(180deg, #170A40, #0E0530); border: 1px solid rgba(255,255,255,.08); color: #F3EEFF; overflow: hidden">
+<div style="position: relative; height: 170px; margin: -12px -12px 6px; border-radius: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 60%, rgba(123,77,255,.42), rgba(14,5,48,0) 70%), #0C0428; border: 1px solid rgba(182,155,255,.28)">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: radial-gradient(ellipse, #000, transparent 75%); mask-image: radial-gradient(ellipse, #000, transparent 75%)"></div>
+<div class="logo-pop" style="position: relative; display: flex; align-items: center; gap: 14px"><img src="assets/oracle-logo.webp" alt="" style="width: 78px; height: 78px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(123,77,255,.7))"><span style="display: flex; flex-direction: column; line-height: 1; text-align: left"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: 0.04em; color: #F3EEFF">TERRA</span><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: 0.04em; color: #22D3EE; text-shadow: 0 0 20px rgba(34,211,238,.5)">ORACLE</span><span style="font-size: 10px; letter-spacing: 0.5em; color: #A699D4; margin-top: 6px">CLASSIC</span></span></div>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #C9BBFF">DAPP</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 24px; font-weight: 700">Terra Oracle</span>
+<span style="color: #C6BCEA; line-height: 1.6; font-size: 15px">Questions, prediction markets, chat and draws, backed by an on-chain reputation score anyone can verify.</span>
+<span style="margin-top: auto; color: #B6A3FF; font-weight: 600; font-size: 15px">Learn more →</span>
+</a>
+<a class="card-hover" href="#repeg" style="display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 24px; background: linear-gradient(180deg, #170A40, #0E0530); border: 1px solid rgba(255,255,255,.08); color: #F3EEFF; overflow: hidden">
+<div style="position: relative; height: 170px; margin: -12px -12px 6px; border-radius: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 60%, rgba(242,178,58,.28), rgba(14,5,48,0) 70%), #0C0428; border: 1px solid rgba(245,196,81,.28)">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: radial-gradient(ellipse, #000, transparent 75%); mask-image: radial-gradient(ellipse, #000, transparent 75%)"></div>
+<div class="logo-pop" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px"><img src="assets/repeg-logo.webp" alt="" style="width: 150px; height: auto; filter: drop-shadow(0 10px 18px rgba(0,0,0,.5))"><span style="font-family: 'Silkscreen', monospace; font-size: 22px; letter-spacing: 0.08em; color: #F5C451; text-shadow: 0 2px 0 #7A4E0E">REPEG CLUB</span></div>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #F4C35A">PLATFORM</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 24px; font-weight: 700">Repeg Club</span>
+<span style="color: #C6BCEA; line-height: 1.6; font-size: 15px">A galactic fair on Terra Classic. Spin the Wheel of Repeg and win the right to redeem USTC for USDC at 1:1.</span>
+<span style="margin-top: auto; color: #F4C35A; font-weight: 600; font-size: 15px">Learn more →</span>
+</a>
+</div>
+<a class="builders card-hover" href="#widgets" style="position: relative; margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding: 22px 26px; border-radius: 22px; background: radial-gradient(ellipse at 0% 50%, rgba(245,196,81,.12), rgba(14,5,48,0) 50%), linear-gradient(90deg, #1A0B46, #0E0530); border: 1px dashed rgba(245,196,81,.4); color: #F3EEFF; overflow: hidden">
+<span aria-hidden="true" class="b-mod" style="flex: none; position: relative; width: 74px; height: 92px">
+<span style="position: absolute; inset: 0 0 12px; border-radius: 12px; background: linear-gradient(150deg,#463E62,#1A1430 45%,#100B20); border: 1px solid rgba(245,196,81,.45); box-shadow: 3px 3px 0 #1C152F, 6px 6px 0 #120C20, 0 16px 30px rgba(0,0,0,.5)">
+<span style="position: absolute; left: 7px; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #4ADE80; box-shadow: 0 0 6px #4ADE80"></span>
+<span style="position: absolute; left: 8px; right: 8px; top: 18px; bottom: 10px; border-radius: 6px; background: #0B0E1A; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05)"><span style="position: absolute; left: 6px; right: 6px; top: 8px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.18)"></span><span style="position: absolute; left: 6px; width: 60%; top: 18px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.1)"></span><span style="position: absolute; left: 6px; right: 6px; bottom: 7px; height: 8px; border-radius: 3px; background: #7B4DFF"></span></span>
+</span>
+<span style="position: absolute; left: 18px; right: 18px; bottom: 2px; height: 8px; border-radius: 0 0 4px 4px; background: repeating-linear-gradient(90deg,#F5C451 0 4px,rgba(245,196,81,0) 4px 8px); box-shadow: 0 0 10px rgba(245,196,81,.5)"></span>
+</span>
+<span style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #F5C451">FOR BUILDERS</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; line-height: 1.2">Bring the P2P market to your own site</span>
+<span style="color: #A699D4; font-size: 14px; line-height: 1.55">An on-chain OTC order book as a plug-in widget. Five lines of code, your wallet signs, no keys leave it.</span>
+</span>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 14px; background: #F2B23A; color: #1A0B3D; font-weight: 700; font-size: 15px; box-shadow: 0 10px 30px rgba(242,178,58,.3)">See the widget <span aria-hidden="true">→</span></span>
+</a>
+</section>
+
+<!-- FRONTIER -->
+<section id="frontier" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 64px">
+<div class="stage" style="flex: 1 1 480px; min-width: 0; height: 720px; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 600px; height: 600px; margin: -300px 0 0 -300px; border-radius: 50%; background: radial-gradient(circle, rgba(59,227,255,.22), rgba(168,85,247,.14) 40%, rgba(10,4,32,0) 68%)"></div>
+<div aria-hidden="true" class="spin" style="position: absolute; left: 50%; top: 50%; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; border: 1px dashed rgba(59,227,255,.25)"></div>
+<!-- phone -->
+<div class="float-a" style="position: absolute; left: 50%; top: 12px; width: 300px; margin-left: -150px">
+<div class="tilt-l" role="img" aria-label="Frontier wallet home screen">
+<div style="position: relative; border-radius: 54px; padding: 3px; background: linear-gradient(150deg, #E4E0F2 0%, #6E6888 16%, #2B2740 46%, #1A1728 62%, #9A94B4 86%, #3C3852 100%); box-shadow: 0 60px 110px rgba(0,0,0,.7), 0 0 70px rgba(59,227,255,.16)">
+<span aria-hidden="true" style="position: absolute; left: -3px; top: 22%; width: 3px; height: 9%; border-radius: 2px 0 0 2px; background: #5E5878"></span>
+<span aria-hidden="true" style="position: absolute; right: -3px; top: 26%; width: 3px; height: 14%; border-radius: 0 2px 2px 0; background: #5E5878"></span>
+<div style="border-radius: 51px; padding: 7px; background: #050409">
+<div style="position: relative; border-radius: 44px; overflow: hidden; background: #0B0E1A">
+<div style="position: relative; width: 100%; aspect-ratio: 1290 / 2690; background: #0B0E1A">
+<div class="fw-view" style="position: absolute; left: 0; right: 0; top: 14.796%; height: 79.07%; overflow: hidden"><picture><source media="(max-width: 720px)" srcset="assets/frontier-content-m.webp"><img class="shot fw-scroll" src="assets/frontier-content.webp" alt=""></picture></div>
+<img src="assets/frontier-header.webp" alt="" style="position: absolute; left: 0; top: 0; width: 100%; height: 14.796%; display: block">
+<img src="assets/frontier-nav.webp" alt="" style="position: absolute; left: 0; top: 93.866%; width: 100%; height: 6.134%; display: block">
+<img class="fw-splash" src="assets/frontier-splash.webp" alt="" style="position: absolute; left: 0; top: 14.796%; width: 100%; height: 85.204%; display: block">
+</div>
+<span aria-hidden="true" style="position: absolute; left: 50%; top: 12px; width: 96px; height: 28px; margin-left: -48px; border-radius: 999px; background: #000"></span>
+<span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 28%)"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- floating panels lifted from the real UI -->
+<div class="float-b" aria-hidden="true" style="position: absolute; left: -2%; top: 150px; width: 250px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(59,227,255,.4); box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 40px rgba(59,227,255,.2); transform: rotateY(14deg)"><img class="shot" src="assets/frontier-balance.webp" alt=""></div>
+<div class="float-c" aria-hidden="true" style="position: absolute; right: -2%; top: 400px; width: 260px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(168,85,247,.45); box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 40px rgba(168,85,247,.22); transform: rotateY(-14deg)"><img class="shot" src="assets/frontier-defi.webp" alt=""></div>
+<div class="float-b" aria-hidden="true" style="position: absolute; left: 4%; bottom: 40px; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(14,10,36,.92); border: 1px solid rgba(59,227,255,.35); box-shadow: 0 20px 40px rgba(0,0,0,.5)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3BE3FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z"></path><path d="M9 13l12-9"></path></svg><div><span style="color: #9DF1FF; font-family: 'JetBrains Mono', monospace; font-size: 11px">TELEGRAM MINI APP</span><div style="margin-top: 3px; font-weight: 600; font-size: 13px">No install needed</div></div></div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #9DF1FF">02 / FRONTIER WALLET</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-size: clamp(28px, 3.4vw, 46px); font-weight: 700; line-height: 1.1">Your Terra Classic wallet, right inside Telegram</h2>
+<p style="margin: 0; color: #C6BCEA; font-size: 17px; line-height: 1.65">Frontier is a Telegram Mini App. Open it in the chat app you already use: your keys stay on your device, so nobody else can move your funds.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Non-custodial</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">12 or 24 word recovery phrase, PIN protected by the phone's secure storage.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Swap and P2P</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Live quotes from on-chain pools across Terra Classic DEXes, multi-hop in one transaction.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Stake and vote</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Delegate LUNC and vote on governance proposals without leaving the app.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">DeFi positions</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Staking, farms and pools across Terra Classic DEXes in one view.</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<a class="btn-primary" href="https://t.me/Frontier_WalletBot" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 26px; border-radius: 14px; background: #3BE3FF; color: #04121A; font-weight: 700; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#04121A" d="M21.9 4.3c.3-1.2-.9-2.1-2-1.7L2.8 9.2c-1.2.5-1.2 2.2.1 2.6l4.3 1.4 1.7 5.3c.3 1 1.6 1.3 2.3.5l2.4-2.4 4.4 3.2c.9.7 2.2.2 2.5-.9zM9.6 14.2l8-7.2-9.6 5.9z"></path></svg>Open @Frontier_WalletBot</a>
+</div>
+</div>
+</section>
+
+<!-- TERRA ORACLE -->
+<section id="oracle" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 64px">
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #C9BBFF">03 / TERRA ORACLE</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-size: clamp(28px, 3.4vw, 46px); font-weight: 700; line-height: 1.1">Voices today. Answers tomorrow.</h2>
+<p style="margin: 0; color: #C6BCEA; font-size: 17px; line-height: 1.65">Terra Oracle Classic is a community dApp where people ask, answer and predict. Every contribution builds an Oracle Score stored in a smart contract, which unlocks ranks, fee discounts and a share of weekly rewards.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Markets</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Prediction markets, live on mainnet.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Ask Oracle &amp; Chat</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Ask the community, reward the best answer.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Oracle Draw</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Daily, Weekly and Circuit, verifiable on chain.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Reputation</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Seven ranks from Initiate to Ascended.</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<a class="btn-primary" href="https://terraoracle.io" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 26px; border-radius: 14px; background: #7B4DFF; color: #FFFFFF; font-weight: 700">Open Terra Oracle</a>
+<a class="btn-ghost" href="https://docs.terraoracle.io" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 26px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); color: #F3EEFF; font-weight: 600">Read the docs</a>
+</div>
+</div>
+<div class="stage" style="flex: 1 1 600px; min-width: 0; position: relative; padding: 40px 0">
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; background: radial-gradient(circle, rgba(139,108,255,.3), rgba(10,4,32,0) 65%)"></div>
+<div class="float-b" aria-hidden="true" style="position: absolute; right: -4%; top: 0; width: 66%; z-index: 0">
+<div style="transform: rotateY(-16deg); transform-origin: 100% 50%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(182,155,255,.35); box-shadow: 0 40px 80px rgba(0,0,0,.6); opacity: .9">
+<div style="display: flex; gap: 6px; padding: 8px 12px; background: #14122A"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF6B6B"></span><span style="width: 8px; height: 8px; border-radius: 50%; background: #F4C35A"></span><span style="width: 8px; height: 8px; border-radius: 50%; background: #4ADE80"></span></div>
+<img class="shot" src="assets/oracle-markets.webp" alt="">
+</div>
+</div>
+<div class="tilt-l" role="img" aria-label="Terra Oracle home screen" style="position: relative; z-index: 1; width: 90%; margin-top: 90px; border-radius: 16px; overflow: hidden; background: #0C0B1A; border: 1px solid rgba(139,108,255,.4); box-shadow: 0 60px 100px rgba(0,0,0,.65), 22px 22px 0 -8px rgba(139,108,255,.14), 0 0 70px rgba(139,108,255,.25)">
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #14122A; border-bottom: 1px solid rgba(255,255,255,.06)">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #FF6B6B"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #F4C35A"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #4ADE80"></span>
+<span style="margin-left: 12px; flex: 1; padding: 4px 12px; border-radius: 8px; background: rgba(255,255,255,.05); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A699D4">terraoracle.io</span>
+</div>
+<img class="shot" src="assets/oracle-home.webp" alt="">
+</div>
+<div class="float-b" aria-hidden="true" style="position: absolute; left: -16px; bottom: 0; width: 96px; height: 96px; border-radius: 50%; padding: 4px; box-sizing: border-box; background: conic-gradient(from 30deg, #B6A3FF, #2A1A66, #E2D9FF, #1E1450, #B6A3FF); box-shadow: 0 6px 0 #1A1040, 0 24px 40px rgba(0,0,0,.6)"><div style="width: 100%; height: 100%; border-radius: 50%; background: #0A0818; display: flex; align-items: center; justify-content: center"><img src="assets/oracle-logo.webp" alt="" style="width: 72%; height: 72%; object-fit: contain"></div></div>
+</div>
+</section>
+
+<!-- REPEG CLUB -->
+<section id="repeg" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 64px">
+<div class="stage" style="flex: 1 1 600px; min-width: 0; position: relative; padding: 40px 0">
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; background: radial-gradient(circle, rgba(244,195,90,.2), rgba(59,110,255,.08) 40%, rgba(10,4,32,0) 66%)"></div>
+<div class="tilt-r" role="img" aria-label="Repeg Club home screen" style="position: relative; z-index: 1; width: 86%; margin: 40px 0 120px 4%; border-radius: 16px; overflow: hidden; background: #0E0C08; border: 1px solid rgba(244,195,90,.45); box-shadow: 0 60px 100px rgba(0,0,0,.65), -22px 22px 0 -8px rgba(244,195,90,.14), 0 0 70px rgba(244,195,90,.18)">
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #19150C; border-bottom: 1px solid rgba(255,255,255,.06)">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #FF6B6B"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #F4C35A"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #4ADE80"></span>
+<span style="margin-left: 12px; flex: 1; padding: 4px 12px; border-radius: 8px; background: rgba(255,255,255,.05); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A699D4">repegclub.com</span>
+</div>
+<img class="shot" src="assets/repeg-home.webp" alt="">
+</div>
+<div class="float-b" aria-hidden="true" style="position: absolute; left: -3%; bottom: -2%; width: 72%; z-index: 2; border: 2px solid #E5A93A; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.65), 0 0 40px rgba(242,178,58,.2)"><img class="shot" src="assets/repeg-how.webp" alt=""></div>
+<div class="float-c" aria-hidden="true" style="position: absolute; right: -3%; top: 0; width: 34%; z-index: 2; border: 2px solid #E0344F; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.65)"><img class="shot" src="assets/repeg-faq.webp" alt=""></div>
+<div class="host" aria-hidden="true" style="position: absolute; right: -1%; bottom: -46px; width: 118px; z-index: 3">
+<div class="bubble"><span class="say-box"><span class="say s1">Step right up!</span><span class="say s2">Win the right to repeg!</span><span class="say s3">Your USTC, 1:1 for USDC</span><span class="say s4">Spin the Wheel!</span><span class="say-h">Take a closer look!</span></span><span class="tail"></span></div>
+<img class="host-img" src="assets/repeg-host.webp" alt="" style="display: block; width: 100%; height: auto; filter: drop-shadow(0 20px 24px rgba(0,0,0,.6))">
+<span class="host-shadow"></span>
+</div>
+</div>
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #F4C35A">04 / REPEG CLUB</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-size: clamp(28px, 3.4vw, 46px); font-weight: 700; line-height: 1.1">A galactic fair on Terra Classic</h2>
+<p style="margin: 0; color: #C6BCEA; font-size: 17px; line-height: 1.65">A band of friendly aliens brought their traveling fair to Terra Classic and plugged the rides into the chain. The main ride, the Wheel of Repeg, lets the winner redeem their own USTC for USDC at 1:1, up to the round's pool.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Wheel of Repeg</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Win the right to repeg your USTC 1:1 for USDC.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Weekly Round</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">The big one, fed by every Wheel played.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Raffles &amp; Airdrops</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Community-run, fully on-chain, real prizes.</span></div>
+<div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700">Create Your Own Luck</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Launch a raffle or an airdrop for your community.</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<a class="btn-primary" href="https://repegclub.com" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 26px; border-radius: 14px; background: #F4C35A; color: #1A1406; font-weight: 700">Visit Repeg Club</a>
+</div>
+</div>
+</section>
+<!-- WIDGETS -->
+<section id="widgets" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 110px 32px 96px">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; margin-bottom: 48px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #B69BFF">05 / WIDGETS</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-size: clamp(28px, 3.6vw, 50px); font-weight: 700; line-height: 1.08">P2P market. <span style="color: #B69BFF">Plug it into any site.</span></h2>
+<p style="margin: 0; max-width: 640px; color: #C6BCEA; font-size: 17px; line-height: 1.65; text-wrap: balance">Our first widget is an on-chain P2P and OTC order book for Terra Classic. It already runs inside Frontier, and any wallet, dApp or community site can embed it with a few lines of code.</p>
+</div>
+
+<div class="wg-panel" style="position: relative; padding: 1px; border-radius: 30px; background: linear-gradient(140deg, rgba(182,155,255,.45), rgba(182,155,255,.08) 40%, rgba(245,196,81,.35)); box-shadow: 0 40px 100px rgba(0,0,0,.45)">
+<div class="wg-grid" style="position: relative; overflow: hidden; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: center; padding: 44px; border-radius: 29px; background: radial-gradient(ellipse at 78% 40%, rgba(123,77,255,.28), rgba(14,5,40,0) 60%), linear-gradient(180deg, #170A42, #0D0430)">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse at 75% 45%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 75% 45%, #000, transparent 70%); pointer-events: none"></div>
+
+<div style="position: relative; display: flex; flex-direction: column; gap: 22px; min-width: 0">
+<div style="display: flex; flex-direction: column">
+<div style="padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.07); display: flex; gap: 14px; align-items: flex-start">
+<span class="nut" style="flex: none; position: relative; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 46 46" width="46" height="46" style="position: absolute; inset: 0" aria-hidden="true"><defs><linearGradient id="nutg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE6A3"></stop><stop offset=".5" stop-color="#C98A1E"></stop><stop offset="1" stop-color="#6B4A12"></stop></linearGradient></defs><polygon points="23,2 41,12.5 41,33.5 23,44 5,33.5 5,12.5" fill="#160A3E" stroke="url(#nutg)" stroke-width="2"></polygon><polygon points="23,8 36,15.5 36,30.5 23,38 10,30.5 10,15.5" fill="none" stroke="rgba(245,196,81,.25)" stroke-width="1"></polygon></svg><span style="position: relative; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 700">On-chain escrow</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Offers live in the otc-p2p contract on columbus-5, and its code can never be migrated.</span></span>
+</div>
+<div style="padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.07); display: flex; gap: 14px; align-items: flex-start">
+<span class="nut" style="flex: none; position: relative; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 46 46" width="46" height="46" style="position: absolute; inset: 0" aria-hidden="true"><defs><linearGradient id="nutg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE6A3"></stop><stop offset=".5" stop-color="#C98A1E"></stop><stop offset="1" stop-color="#6B4A12"></stop></linearGradient></defs><polygon points="23,2 41,12.5 41,33.5 23,44 5,33.5 5,12.5" fill="#160A3E" stroke="url(#nutg)" stroke-width="2"></polygon><polygon points="23,8 36,15.5 36,30.5 23,38 10,30.5 10,15.5" fill="none" stroke="rgba(245,196,81,.25)" stroke-width="1"></polygon></svg><span style="position: relative; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l9-9M17 6l3 3"></path></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 700">Keys stay with the user</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">The widget never holds a key. Your own wallet signs every trade.</span></span>
+</div>
+<div style="padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.07); display: flex; gap: 14px; align-items: flex-start">
+<span class="nut" style="flex: none; position: relative; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 46 46" width="46" height="46" style="position: absolute; inset: 0" aria-hidden="true"><defs><linearGradient id="nutg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE6A3"></stop><stop offset=".5" stop-color="#C98A1E"></stop><stop offset="1" stop-color="#6B4A12"></stop></linearGradient></defs><polygon points="23,2 41,12.5 41,33.5 23,44 5,33.5 5,12.5" fill="#160A3E" stroke="url(#nutg)" stroke-width="2"></polygon><polygon points="23,8 36,15.5 36,30.5 23,38 10,30.5 10,15.5" fill="none" stroke="rgba(245,196,81,.25)" stroke-width="1"></polygon></svg><span style="position: relative; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14M7 8l-3 7h6zM17 8l-3 7h6z"></path></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 700">Fair by design</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">0.1% only when an offer fills. Free to list, no slippage.</span></span>
+</div>
+<div style="padding: 14px 0 0; display: flex; gap: 14px; align-items: flex-start">
+<span class="nut" style="flex: none; position: relative; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 46 46" width="46" height="46" style="position: absolute; inset: 0" aria-hidden="true"><defs><linearGradient id="nutg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE6A3"></stop><stop offset=".5" stop-color="#C98A1E"></stop><stop offset="1" stop-color="#6B4A12"></stop></linearGradient></defs><polygon points="23,2 41,12.5 41,33.5 23,44 5,33.5 5,12.5" fill="#160A3E" stroke="url(#nutg)" stroke-width="2"></polygon><polygon points="23,8 36,15.5 36,30.5 23,38 10,30.5 10,15.5" fill="none" stroke="rgba(245,196,81,.25)" stroke-width="1"></polygon></svg><span style="position: relative; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 0 0 18c1.5 0 2-1 2-2s-1-2 0-3 3 0 4-1 3-4-1-8"></path><circle cx="8" cy="10" r="1"></circle><circle cx="12" cy="7" r="1"></circle></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 700">Looks native anywhere</span><span style="color: #A699D4; font-size: 14px; line-height: 1.55">Palette and typography follow the site it is embedded in.</span></span>
+</div>
+</div>
+<div class="wg-code" style="border-radius: 16px; background: rgba(6,2,22,.75); border: 1px solid rgba(245,196,81,.3); overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.07)"><span style="display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #F5C451"><span style="width: 7px; height: 7px; border-radius: 50%; background: #4ADE80; box-shadow: 0 0 8px #4ADE80"></span>EMBED CODE</span><button class="copy-embed" type="button" style="min-height: 30px; padding: 0 14px; border-radius: 8px; border: 1px solid rgba(245,196,81,.45); background: rgba(245,196,81,.08); color: #F5C451; font: 600 12px/1 Manrope, sans-serif; cursor: pointer">Copy</button></div>
+<pre class="embed-code" style="margin: 0; padding: 14px 16px; white-space: pre-wrap; word-break: break-word; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.75; color: #E9E0FF"><span style="color:#7E70B0">&lt;</span><span style="color:#F5C451">iframe</span> <span style="color:#22D3EE">src</span>=<span style="color:#9FE6B4">"https://p2p.delfos-hub.net/embed.html"</span>
+  <span style="color:#22D3EE">title</span>=<span style="color:#9FE6B4">"Delfos P2P market"</span> <span style="color:#22D3EE">width</span>=<span style="color:#9FE6B4">"420"</span> <span style="color:#22D3EE">height</span>=<span style="color:#9FE6B4">"760"</span>
+  <span style="color:#22D3EE">sandbox</span>=<span style="color:#9FE6B4">"allow-scripts allow-same-origin allow-forms"</span><span style="color:#7E70B0">&gt;</span>
+<span style="color:#7E70B0">&lt;/</span><span style="color:#F5C451">iframe</span><span style="color:#7E70B0">&gt;</span></pre>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn-primary" href="https://t.me/DelfosHub" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 24px; border-radius: 14px; background: #7B4DFF; color: #FFFFFF; font-weight: 700">Embed it on your site</a>
+<a class="btn-ghost" href="https://t.me/Frontier_WalletBot" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 24px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); color: #F3EEFF; font-weight: 600">Try it in Frontier</a>
+</div>
+</div>
+
+<div class="wg-visual" role="img" aria-label="The P2P widget drawn as a plug-in module" style="position: relative; min-height: 700px; perspective: 1700px">
+<div aria-hidden="true" style="position: absolute; left: 58%; top: 34%; transform: translate(-50%, -50%)"><svg class="gear g1" viewBox="-220.0 -220.0 440 440" width="440" height="440" aria-hidden="true"><path d="M187.5,0.0 L217.5,14.3 L216.1,28.5 L183.9,36.6 L181.1,48.5 L206.4,70.1 L201.4,83.4 L168.1,82.9 L162.4,93.7 L181.3,121.1 L173.0,132.7 L141.0,123.6 L132.6,132.6 L143.7,163.9 L132.7,173.0 L104.2,155.9 L93.7,162.4 L96.4,195.5 L83.4,201.4 L60.3,177.5 L48.5,181.1 L42.5,213.8 L28.5,216.1 L12.3,187.1 L0.0,187.5 L-14.3,217.5 L-28.5,216.1 L-36.6,183.9 L-48.5,181.1 L-70.1,206.4 L-83.4,201.4 L-82.9,168.1 L-93.7,162.4 L-121.1,181.3 L-132.7,173.0 L-123.6,141.0 L-132.6,132.6 L-163.9,143.7 L-173.0,132.7 L-155.9,104.2 L-162.4,93.7 L-195.5,96.4 L-201.4,83.4 L-177.5,60.3 L-181.1,48.5 L-213.8,42.5 L-216.1,28.5 L-187.1,12.3 L-187.5,0.0 L-217.5,-14.3 L-216.1,-28.5 L-183.9,-36.6 L-181.1,-48.5 L-206.4,-70.1 L-201.4,-83.4 L-168.1,-82.9 L-162.4,-93.7 L-181.3,-121.1 L-173.0,-132.7 L-141.0,-123.6 L-132.6,-132.6 L-143.7,-163.9 L-132.7,-173.0 L-104.2,-155.9 L-93.7,-162.4 L-96.4,-195.5 L-83.4,-201.4 L-60.3,-177.5 L-48.5,-181.1 L-42.5,-213.8 L-28.5,-216.1 L-12.3,-187.1 L-0.0,-187.5 L14.3,-217.5 L28.5,-216.1 L36.6,-183.9 L48.5,-181.1 L70.1,-206.4 L83.4,-201.4 L82.9,-168.1 L93.7,-162.4 L121.1,-181.3 L132.7,-173.0 L123.6,-141.0 L132.6,-132.6 L163.9,-143.7 L173.0,-132.7 L155.9,-104.2 L162.4,-93.7 L195.5,-96.4 L201.4,-83.4 L177.5,-60.3 L181.1,-48.5 L213.8,-42.5 L216.1,-28.5 L187.1,-12.3 Z M47.96,0 A47.96,47.96 0 1 0 -47.96,0 A47.96,47.96 0 1 0 47.96,0 Z" fill="rgba(245,196,81,.06)" fill-rule="evenodd" stroke="rgba(245,196,81,.55)" stroke-width="1.5"></path><circle r="138.7" fill="none" stroke="rgba(245,196,81,.55)" stroke-width="1" stroke-opacity=".6"></circle><g stroke="rgba(245,196,81,.55)" stroke-width="1.2" stroke-opacity=".55"><line x1="62.3" y1="0.0" x2="135.0" y2="0.0"></line><line x1="31.2" y1="54.0" x2="67.5" y2="116.9"></line><line x1="-31.2" y1="54.0" x2="-67.5" y2="116.9"></line><line x1="-62.3" y1="0.0" x2="-135.0" y2="0.0"></line><line x1="-31.2" y1="-54.0" x2="-67.5" y2="-116.9"></line><line x1="31.2" y1="-54.0" x2="67.5" y2="-116.9"></line></g></svg></div>
+<div aria-hidden="true" style="position: absolute; left: 22%; top: 70%; transform: translate(-50%, -50%)"><svg class="gear g2" viewBox="-120.0 -120.0 240 240" width="240" height="240" aria-hidden="true"><path d="M101.5,0.0 L117.3,13.2 L115.0,26.3 L95.8,33.5 L91.4,44.0 L99.9,62.8 L92.3,73.6 L71.8,71.8 L63.3,79.3 L62.8,99.9 L51.2,106.3 L33.5,95.8 L22.6,98.9 L13.2,117.3 L0.0,118.0 L-11.4,100.8 L-22.6,98.9 L-39.0,111.4 L-51.2,106.3 L-54.0,85.9 L-63.3,79.3 L-83.4,83.4 L-92.3,73.6 L-85.9,54.0 L-91.4,44.0 L-111.4,39.0 L-115.0,26.3 L-100.8,11.4 L-101.5,0.0 L-117.3,-13.2 L-115.0,-26.3 L-95.8,-33.5 L-91.4,-44.0 L-99.9,-62.8 L-92.3,-73.6 L-71.8,-71.8 L-63.3,-79.3 L-62.8,-99.9 L-51.2,-106.3 L-33.5,-95.8 L-22.6,-98.9 L-13.2,-117.3 L-0.0,-118.0 L11.4,-100.8 L22.6,-98.9 L39.0,-111.4 L51.2,-106.3 L54.0,-85.9 L63.3,-79.3 L83.4,-83.4 L92.3,-73.6 L85.9,-54.0 L91.4,-44.0 L111.4,-39.0 L115.0,-26.3 L100.8,-11.4 Z M25.96,0 A25.96,25.96 0 1 0 -25.96,0 A25.96,25.96 0 1 0 25.96,0 Z" fill="rgba(123,77,255,.06)" fill-rule="evenodd" stroke="rgba(182,155,255,.6)" stroke-width="1.5"></path><circle r="75.1" fill="none" stroke="rgba(182,155,255,.6)" stroke-width="1" stroke-opacity=".6"></circle><g stroke="rgba(182,155,255,.6)" stroke-width="1.2" stroke-opacity=".55"><line x1="33.7" y1="0.0" x2="73.1" y2="0.0"></line><line x1="16.9" y1="29.2" x2="36.5" y2="63.3"></line><line x1="-16.9" y1="29.2" x2="-36.5" y2="63.3"></line><line x1="-33.7" y1="0.0" x2="-73.1" y2="0.0"></line><line x1="-16.9" y1="-29.2" x2="-36.5" y2="-63.3"></line><line x1="16.9" y1="-29.2" x2="36.5" y2="-63.3"></line></g></svg></div>
+<div aria-hidden="true" style="position: absolute; left: 88%; top: 76%; transform: translate(-50%, -50%)"><svg class="gear g3" viewBox="-65.0 -65.0 130 130" width="130" height="130" aria-hidden="true"><path d="M54.2,0.0 L62.2,9.9 L59.9,19.5 L48.3,24.6 L43.8,31.8 L44.5,44.5 L37.0,51.0 L24.6,48.3 L16.7,51.5 L9.9,62.2 L0.0,63.0 L-8.5,53.5 L-16.7,51.5 L-28.6,56.1 L-37.0,51.0 L-38.3,38.3 L-43.8,31.8 L-56.1,28.6 L-59.9,19.5 L-53.5,8.5 L-54.2,0.0 L-62.2,-9.9 L-59.9,-19.5 L-48.3,-24.6 L-43.8,-31.8 L-44.5,-44.5 L-37.0,-51.0 L-24.6,-48.3 L-16.7,-51.5 L-9.9,-62.2 L-0.0,-63.0 L8.5,-53.5 L16.7,-51.5 L28.6,-56.1 L37.0,-51.0 L38.3,-38.3 L43.8,-31.8 L56.1,-28.6 L59.9,-19.5 L53.5,-8.5 Z M13.86,0 A13.86,13.86 0 1 0 -13.86,0 A13.86,13.86 0 1 0 13.86,0 Z" fill="rgba(245,196,81,.03)" fill-rule="evenodd" stroke="rgba(245,196,81,.35)" stroke-width="1.5"></path><circle r="40.1" fill="none" stroke="rgba(245,196,81,.35)" stroke-width="1" stroke-opacity=".6"></circle><g stroke="rgba(245,196,81,.35)" stroke-width="1.2" stroke-opacity=".55"><line x1="18.0" y1="0.0" x2="39.0" y2="0.0"></line><line x1="9.0" y1="15.6" x2="19.5" y2="33.8"></line><line x1="-9.0" y1="15.6" x2="-19.5" y2="33.8"></line><line x1="-18.0" y1="0.0" x2="-39.0" y2="0.0"></line><line x1="-9.0" y1="-15.6" x2="-19.5" y2="-33.8"></line><line x1="9.0" y1="-15.6" x2="19.5" y2="-33.8"></line></g></svg></div>
+
+<!-- dock -->
+<div class="wg-dock" aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; width: 380px; height: 70px; margin-left: -190px; border-radius: 50%; background: radial-gradient(ellipse, rgba(245,196,81,.35), rgba(123,77,255,.18) 45%, rgba(10,4,32,0) 70%); filter: blur(2px)"></div>
+<div class="wg-port" aria-hidden="true" style="position: absolute; left: 50%; bottom: 34px; width: 250px; height: 26px; margin-left: -125px; border-radius: 10px; background: linear-gradient(180deg, #2A2244, #0E0A1E); border: 1px solid rgba(245,196,81,.35); box-shadow: 0 10px 30px rgba(0,0,0,.6), inset 0 2px 6px rgba(0,0,0,.6)"><span style="position: absolute; left: 14px; right: 14px; top: 9px; height: 8px; border-radius: 4px; background: #05030C; box-shadow: inset 0 0 6px rgba(245,196,81,.55)"></span></div>
+
+<!-- main module -->
+<div class="wg-mod" style="position: absolute; left: 50%; top: 18px; width: min(320px, 74%); z-index: 2; transform: translateX(-56%) rotateY(-14deg) rotateX(7deg)">
+<div class="casing casing-main" style="position: relative; border-radius: 26px; padding: 12px 12px 16px">
+<span class="screw" style="left: 12px; top: 12px"></span><span class="screw" style="right: 12px; top: 12px"></span><span class="screw" style="left: 12px; bottom: 12px"></span><span class="screw" style="right: 12px; bottom: 12px"></span>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 26px 12px">
+<span style="display: flex; align-items: center; gap: 8px"><span class="led" style="width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; box-shadow: 0 0 10px #4ADE80, 0 0 2px #fff inset"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #F5C451">P2P MODULE</span></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: #8E80BE">DELFOS · v1</span>
+</div>
+<div class="tk-screen" style="position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(0,0,0,.7); box-shadow: inset 0 0 0 1px rgba(255,255,255,.04)"><img class="shot" src="assets/p2p-module.webp" alt="P2P widget: new offer form">
+<div class="tk-wrap">
+<button class="tk-hot" type="button" aria-label="Show the tokens you can sell"><span class="tk-ring"></span><span class="tk-tip"><span class="tip-hover">Hover to pick a token</span><span class="tip-tap">Tap to pick a token</span></span></button>
+<div class="tk-drop" tabindex="-1" aria-label="Tokens you can sell"><img src="assets/p2p-tokens2.webp" alt="" style="display: block; width: 100%; height: auto"></div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px 0">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: #8E80BE">RUNNING IN FRONTIER</span>
+<span style="display: flex; gap: 4px"><span style="width: 14px; height: 3px; border-radius: 2px; background: #F5C451"></span><span style="width: 14px; height: 3px; border-radius: 2px; background: #F5C451; opacity: .5"></span><span style="width: 14px; height: 3px; border-radius: 2px; background: #F5C451; opacity: .25"></span></span>
+</div>
+</div>
+<div class="pins" aria-hidden="true"></div>
+</div>
+
+<!-- annotations -->
+<div class="wg-note n1" aria-hidden="true"><span class="dot"></span>Wallet bridge · postMessage</div>
+<div class="wg-note n2" aria-hidden="true"><span class="dot"></span>otc-p2p contract · columbus-5</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 120px 32px 80px">
+<div aria-hidden="true" style="position: absolute; left: 50%; top: 40px; width: 900px; height: 500px; margin-left: -450px; border-radius: 50%; background: radial-gradient(ellipse, rgba(123,77,255,.22), rgba(10,4,32,0) 65%); pointer-events: none"></div>
+<div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; margin-bottom: 64px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.18em; color: #F5C451">06 / PRINCIPLES</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-size: clamp(30px, 4vw, 54px); font-weight: 700">How we build</h2>
+<p style="margin: 0; max-width: 560px; color: #C6BCEA; font-size: 17px; line-height: 1.6">Three rules every Delfos Hub product follows, from the first commit to mainnet.</p>
+</div>
+
+<div style="position: relative">
+<div aria-hidden="true" style="position: absolute; left: 8%; right: 8%; top: 46px; height: 1px; background: linear-gradient(90deg, rgba(245,196,81,0), rgba(245,196,81,.6), rgba(245,196,81,0))"></div>
+<div class="stage" style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px 24px; row-gap: 80px; padding-top: 46px">
+
+<div class="lift" style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 0 28px 34px; border-radius: 26px; background: linear-gradient(180deg, rgba(42,18,110,.65), rgba(16,6,48,.9)); border: 1px solid rgba(182,155,255,.18); box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(245,196,81,.35)">
+<div style="margin-top: -46px; width: 92px; height: 92px; border-radius: 50%; padding: 3px; box-sizing: border-box; background: conic-gradient(from 210deg, #F5C451, #6B4A12, #FFE6A3, #5A3D0E, #F5C451); box-shadow: 0 0 40px rgba(242,178,58,.35), 0 18px 30px rgba(0,0,0,.5)">
+<div style="width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #2E1670, #0E0530); display: flex; align-items: center; justify-content: center">
+<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l9-9M17 6l3 3M14 9l2 2"></path></svg>
+</div>
+</div>
+<span aria-hidden="true" style="position: absolute; right: 22px; top: 26px; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 88px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(245,196,81,.22)">01</span>
+<span style="position: relative; font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 8px">Your keys, your assets</span>
+<span style="position: relative; color: #C6BCEA; line-height: 1.65; font-size: 15px">Nothing we ship holds user funds or private keys on a server. You sign, you own.</span>
+</div>
+
+<div class="lift" style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 0 28px 34px; border-radius: 26px; background: linear-gradient(180deg, rgba(42,18,110,.65), rgba(16,6,48,.9)); border: 1px solid rgba(182,155,255,.18); box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(245,196,81,.35)">
+<div style="margin-top: -46px; width: 92px; height: 92px; border-radius: 50%; padding: 3px; box-sizing: border-box; background: conic-gradient(from 210deg, #F5C451, #6B4A12, #FFE6A3, #5A3D0E, #F5C451); box-shadow: 0 0 40px rgba(242,178,58,.35), 0 18px 30px rgba(0,0,0,.5)">
+<div style="width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #2E1670, #0E0530); display: flex; align-items: center; justify-content: center">
+<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9z"></path><path d="M12 11l8-4.5M12 11v9M12 11L4 6.5"></path></svg>
+</div>
+</div>
+<span aria-hidden="true" style="position: absolute; right: 22px; top: 26px; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 88px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(245,196,81,.22)">02</span>
+<span style="position: relative; font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 8px">On-chain first</span>
+<span style="position: relative; color: #C6BCEA; line-height: 1.65; font-size: 15px">State that matters lives in smart contracts on Terra Classic, not in a database we control.</span>
+</div>
+
+<div class="lift" style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 0 28px 34px; border-radius: 26px; background: linear-gradient(180deg, rgba(42,18,110,.65), rgba(16,6,48,.9)); border: 1px solid rgba(182,155,255,.18); box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(245,196,81,.35)">
+<div style="margin-top: -46px; width: 92px; height: 92px; border-radius: 50%; padding: 3px; box-sizing: border-box; background: conic-gradient(from 210deg, #F5C451, #6B4A12, #FFE6A3, #5A3D0E, #F5C451); box-shadow: 0 0 40px rgba(242,178,58,.35), 0 18px 30px rgba(0,0,0,.5)">
+<div style="width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #2E1670, #0E0530); display: flex; align-items: center; justify-content: center">
+<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
+</div>
+</div>
+<span aria-hidden="true" style="position: absolute; right: 22px; top: 26px; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 88px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(245,196,81,.22)">03</span>
+<span style="position: relative; font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 8px">Verify, don't trust</span>
+<span style="position: relative; color: #C6BCEA; line-height: 1.65; font-size: 15px">Open code and reproducible contract builds, so anyone can check the checksum themselves.</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section id="contact" style="position: relative; padding: 80px 24px 0; overflow: hidden">
+<div style="position: relative; max-width: 1240px; margin: 0 auto; min-height: 640px; border-radius: 36px; overflow: hidden; border: 1px solid rgba(245,196,81,.3); background: radial-gradient(ellipse at 50% 110%, #3A119A 0%, #1C0756 40%, #0E0430 75%); box-shadow: 0 40px 100px rgba(0,0,0,.5)">
+<div aria-hidden="true" style="position: absolute; left: 50%; bottom: -840px; width: 1400px; height: 1400px; margin-left: -700px; pointer-events: none">
+<div class="rays" style="position: absolute; inset: 0; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(245,196,81,.12) 0deg 2deg, rgba(245,196,81,0) 2deg 12deg)"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 50%; bottom: -1870px; width: 2000px; height: 2000px; margin-left: -1000px; border-radius: 50%; background: #0A0420; box-shadow: 0 -2px 0 rgba(245,196,81,.6), 0 -30px 90px rgba(242,178,58,.3), 0 -120px 200px rgba(123,77,255,.4)"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%)"></div>
+
+<div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; padding: clamp(56px, 7vw, 88px) 24px 210px">
+<img class="core" src="assets/delfos-eye.webp" alt="" aria-hidden="true" style="width: 110px; height: auto; filter: drop-shadow(0 0 26px rgba(242,178,58,.6))">
+<h2 style="margin: 0; max-width: 900px; text-wrap: balance; font-family: 'Chakra Petch', sans-serif; font-size: clamp(30px, 4.6vw, 60px); font-weight: 700; line-height: 1.05">Building on Terra Classic? <span style="color: #F2B23A">Let's talk.</span></h2>
+<p style="margin: 0; max-width: 680px; color: #C6BCEA; font-size: 18px; line-height: 1.6; text-wrap: balance">Listings, integrations, partnerships. Reach the Delfos Hub team directly.</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px">
+<span style="padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(182,155,255,.3); background: rgba(20,8,52,.6); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #C6BCEA">LISTINGS</span>
+<span style="padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(182,155,255,.3); background: rgba(20,8,52,.6); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #C6BCEA">WALLET INTEGRATIONS</span>
+<span style="padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(182,155,255,.3); background: rgba(20,8,52,.6); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #C6BCEA">JOINT PRODUCTS</span>
+</div>
+<div style="width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin-top: 12px">
+<a class="card-hover contact-card" href="https://t.me/DelfosHub" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 18px; padding: 22px 24px; border-radius: 22px; background: rgba(22,10,58,.78); border: 1px solid rgba(245,196,81,.3); box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06); backdrop-filter: blur(10px); text-align: left; color: #F3EEFF; min-width: 0">
+<div class="contact-med" style="flex: none; width: 64px; height: 64px; border-radius: 50%; padding: 3px; box-sizing: border-box; background: conic-gradient(from 210deg, #F5C451, #6B4A12, #FFE6A3, #5A3D0E, #F5C451); box-shadow: 0 0 30px rgba(242,178,58,.35)"><div style="width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #2E1670, #0E0530); display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F5C451" d="M21.9 4.3c.3-1.2-.9-2.1-2-1.7L2.8 9.2c-1.2.5-1.2 2.2.1 2.6l4.3 1.4 1.7 5.3c.3 1 1.6 1.3 2.3.5l2.4-2.4 4.4 3.2c.9.7 2.2.2 2.5-.9zM9.6 14.2l8-7.2-9.6 5.9z"></path></svg></div></div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #F5C451">TELEGRAM COMMUNITY</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.1" class="contact-val">@DelfosHub</span>
+<span style="font-size: 14px; color: #A699D4">Join the group, talk to the team</span>
+</div>
+<span class="contact-arrow" aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #F2B23A; color: #1A0B3D; font-weight: 700">→</span>
+</a>
+<a class="card-hover contact-card" href="mailto:delfoshub.team@gmail.com" style="display: flex; align-items: center; gap: 18px; padding: 22px 24px; border-radius: 22px; background: rgba(22,10,58,.78); border: 1px solid rgba(245,196,81,.3); box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06); backdrop-filter: blur(10px); text-align: left; color: #F3EEFF; min-width: 0">
+<div class="contact-med" style="flex: none; width: 64px; height: 64px; border-radius: 50%; padding: 3px; box-sizing: border-box; background: conic-gradient(from 210deg, #F5C451, #6B4A12, #FFE6A3, #5A3D0E, #F5C451); box-shadow: 0 0 30px rgba(242,178,58,.35)"><div style="width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #2E1670, #0E0530); display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C451" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3.5 7l8.5 6 8.5-6"></path></svg></div></div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #F5C451">EMAIL</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.25; letter-spacing: 0.01em; overflow-wrap: anywhere" class="contact-mail">delfoshub.team@gmail.com</span>
+<span style="font-size: 14px; color: #A699D4">Listings, partnerships, press</span>
+</div>
+<span class="contact-arrow" aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(245,196,81,.5); color: #F5C451; font-weight: 700">→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="position: relative; margin-top: 72px; border-top: 1px solid rgba(245,196,81,.15); background: linear-gradient(180deg, rgba(20,8,52,.4), rgba(10,4,32,0))">
+<div style="max-width: 1240px; margin: 0 auto; padding: 56px 32px 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px">
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 16px; max-width: 340px">
+<img src="assets/delfos-logo.webp" alt="Delfos Hub" style="height: 54px; width: auto; align-self: flex-start">
+<p style="margin: 0; color: #A699D4; font-size: 14px; line-height: 1.6">Web3 products for Terra Classic: a wallet, an oracle and a fair, built in the open.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: 0.14em; color: #F5C451; font-size: 13px">PRODUCTS</span>
+<a href="https://t.me/Frontier_WalletBot" target="_blank" rel="noopener" style="color: #C6BCEA">Frontier</a>
+<a href="https://terraoracle.io" style="color: #C6BCEA">Terra Oracle</a>
+<a href="https://repegclub.com" style="color: #C6BCEA">Repeg Club</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: 0.14em; color: #F5C451; font-size: 13px">COMMUNITY</span>
+<a href="https://t.me/DelfosHub" target="_blank" rel="noopener" style="color: #C6BCEA">Telegram @DelfosHub</a>
+<a href="mailto:delfoshub.team@gmail.com" style="color: #C6BCEA">delfoshub.team@gmail.com</a>
+</div>
+</div>
+</div>
+<div style="max-width: 1240px; margin: 0 auto; padding: 20px 32px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,.06); font-size: 13px; color: #A699D4">
+<span>© 2026 Delfos Hub</span>
+<span style="font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em">BUILT ON TERRA CLASSIC · COLUMBUS-5</span>
+</div>
+</footer>
+</div>
+<button id="to-top" type="button" aria-label="Back to top">
+<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="rgba(245,196,81,.18)" stroke-width="3"></circle><circle class="tt-ring" cx="32" cy="32" r="29" fill="none" stroke="#F5C451" stroke-width="3" stroke-linecap="round" stroke-dasharray="182.2" stroke-dashoffset="182.2"></circle></svg>
+<span class="tt-chev" aria-hidden="true"><svg width="14" height="9" viewBox="0 0 14 9"><path d="M1.5 7.5L7 2l5.5 5.5" fill="none" stroke="#F5C451" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+<img src="assets/delfos-eye.webp" alt="">
+<span class="tt-label" aria-hidden="true">Back to top</span>
+</button>
+<style>
+#to-top{position:fixed;right:max(22px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:64px;height:64px;border-radius:50%;border:0;padding:0;cursor:pointer;background:radial-gradient(circle at 40% 30%,#2E1670,#0E0530);box-shadow:0 14px 34px rgba(0,0,0,.55),0 0 30px rgba(242,178,58,.25);opacity:0;transform:translateY(24px) scale(.8);pointer-events:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1.25),box-shadow .3s ease;z-index:60}
+#to-top.show{opacity:1;transform:none;pointer-events:auto}
+#to-top:hover{box-shadow:0 18px 40px rgba(0,0,0,.6),0 0 46px rgba(242,178,58,.5)}
+#to-top>svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+#to-top .tt-ring{transition:stroke-dashoffset .12s linear}
+#to-top img{position:absolute;left:50%;top:57%;width:34px;height:auto;transform:translate(-50%,-50%);transition:transform .35s cubic-bezier(.2,.8,.2,1.3);filter:drop-shadow(0 0 8px rgba(242,178,58,.55))}
+#to-top .tt-chev{position:absolute;left:50%;top:12px;transform:translateX(-50%);line-height:0;transition:transform .35s ease}
+#to-top:hover img{transform:translate(-50%,-56%) scale(1.08)}
+#to-top:hover .tt-chev{animation:ttBob .9s ease-in-out infinite}
+#to-top .tt-label{position:absolute;right:76px;top:50%;transform:translate(8px,-50%);white-space:nowrap;padding:7px 12px;border-radius:999px;background:rgba(20,8,54,.95);border:1px solid rgba(245,196,81,.35);font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#F5C451;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+#to-top:hover .tt-label{opacity:1;transform:translate(0,-50%)}
+#to-top.launch img{animation:ttLaunch .8s cubic-bezier(.5,0,.2,1)}
+#to-top.launch .tt-chev{animation:ttLaunch .8s cubic-bezier(.5,0,.2,1)}
+@keyframes ttBob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
+@keyframes ttLaunch{0%{translate:0 0;opacity:1}45%{translate:0 -46px;opacity:0}46%{translate:0 30px;opacity:0}100%{translate:0 0;opacity:1}}
+@media (max-width:720px){#to-top{width:56px;height:56px}#to-top img{width:30px}#to-top .tt-chev{top:9px}#to-top .tt-label{display:none}}
+@media (prefers-reduced-motion: reduce){#to-top,#to-top img,#to-top .tt-chev{transition:none;animation:none!important}}
+</style>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cleanUrl=function(){history.replaceState(null,'',location.pathname+location.search)};
+  // in-page links scroll smoothly and never leave a #hash in the address bar
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href').slice(1);
+    var el=id==='top'||id===''?null:document.getElementById(id);
+    if(id!=='top'&&id!==''&&!el) return;
+    e.preventDefault();
+    var hd=document.querySelector('.hdr-wrap'); var off=hd?hd.offsetHeight+12:8; var y=el?el.getBoundingClientRect().top+scrollY-off:0;
+    scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+    var d=a.closest('details'); if(d) d.removeAttribute('open');
+    cleanUrl();
+  });
+  if(location.hash){
+    var t=document.getElementById(location.hash.slice(1)); cleanUrl();
+    if(t){var go=function(){var hd=document.querySelector('.hdr-wrap');scrollTo(0,t.getBoundingClientRect().top+scrollY-(hd?hd.offsetHeight+12:8))}; go(); addEventListener('load',go,{once:true});}
+  }
+  // back-to-top button with scroll progress ring
+  var btn=document.getElementById('to-top'), ring=btn.querySelector('.tt-ring'), L=182.2, ticking=false;
+  function update(){
+    var max=document.documentElement.scrollHeight-innerHeight, p=max>0?scrollY/max:0;
+    ring.style.strokeDashoffset=(L*(1-p)).toFixed(1);
+    btn.classList.toggle('show',scrollY>700);
+    var hw=document.querySelector('.hdr-wrap'); if(hw) hw.classList.toggle('scrolled',scrollY>30);
+    ticking=false;
+  }
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update); update();
+  btn.addEventListener('click',function(){
+    btn.classList.remove('launch'); void btn.offsetWidth; btn.classList.add('launch');
+    scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+  });
+  btn.addEventListener('animationend',function(){btn.classList.remove('launch')});
+  // copy the embed snippet
+  document.querySelectorAll('.copy-embed').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.closest('.wg-code').querySelector('.embed-code').textContent;
+      (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)},function(){b.textContent='Select & copy'});
+    });
+  });
+  // highlight the section in view
+  var links=document.querySelectorAll('.nav-link[data-sec]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;links.forEach(function(l){l.classList.toggle('active',l.dataset.sec===id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+    ['frontier','oracle','repeg','widgets','principles','contact','top','products'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+  }
+})();
+</script>
+</body>
+</html>
