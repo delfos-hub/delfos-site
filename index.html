@@ -930,24 +930,42 @@ WEB3 STUDIO · TERRA CLASSIC
     var SANDBOX='allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox';
     function render(){
       code.innerHTML=lt+tag+' '+a('src',src())+'\n  '+a('title','Delfos P2P market')+' '+a('width',String(W()))+' '+a('height',String(H))+' '+a('style','border: 0')+'\n  '+a('sandbox',SANDBOX)+gt+'\n'+'<span style="color:#7E70B0">&lt;/</span>'+tag+gt;
-      var f=pbox&&pbox.querySelector('iframe'); if(f){ if(f.src!==src()) f.src=src(); fit(); }
+      var f=pbox&&pbox.querySelector('iframe'); if(f){ if(f.src!==src()){ loading(true); f.src=src(); } fit(); }
     }
     // the preview keeps the real iframe size and is scaled down to fit the column
     function fit(){
-      var f=pbox&&pbox.querySelector('iframe'); if(!f||pbox.hidden) return;
-      var w=W(), k=Math.min(1,pbox.clientWidth/w);
-      f.style.width=w+'px'; f.style.height=H+'px'; f.style.transform='scale('+k+')';
+      var f=pbox&&pbox.querySelector('iframe'); if(!f) return;
+      var w=W(); f.style.width=w+'px'; f.style.height=H+'px';
+      if(pbox.hidden) return;
+      var k=Math.min(1,pbox.clientWidth/w); f.style.transform='scale('+k+')';
       pbox.style.height=Math.ceil(H*k)+'px';
     }
     addEventListener('resize',fit);
     pal.addEventListener('change',render); typ.addEventListener('change',render); lay.addEventListener('change',render);
+    // the preview is the real widget; it starts loading, hidden, as the section
+    // comes near, so it is usually ready by the time the button is pressed
+    var note=null;
+    function loading(on){
+      if(!pbox) return;
+      if(!note){ note=document.createElement('div'); note.textContent='Loading preview…'; note.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,2,22,.85);color:#A699D4;font:500 13px/1 Manrope,sans-serif;z-index:1'; pbox.appendChild(note); }
+      note.style.display=on?'flex':'none';
+    }
+    function ensure(){
+      if(!pbox||pbox.querySelector('iframe')) return;
+      var f=document.createElement('iframe');
+      f.title='Delfos P2P market (preview)'; f.style.border='0'; f.style.display='block'; f.style.transformOrigin='0 0';
+      f.setAttribute('sandbox',SANDBOX); f.addEventListener('load',function(){ loading(false); });
+      loading(true); f.src=src(); pbox.appendChild(f); fit();
+    }
+    if(pbox){
+      if('IntersectionObserver' in window){
+        var pio=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting})){ pio.disconnect(); ensure(); } },{rootMargin:'600px 0px'});
+        pio.observe(pbox.parentNode);
+      }
+    }
     if(pbtn&&pbox) pbtn.addEventListener('click',function(){
       var open=pbox.hidden;
-      if(open&&!pbox.querySelector('iframe')){
-        var f=document.createElement('iframe');
-        f.title='Delfos P2P market (preview)'; f.style.border='0'; f.style.display='block'; f.style.transformOrigin='0 0';
-        f.setAttribute('sandbox',SANDBOX); f.src=src(); pbox.appendChild(f);
-      }
+      if(open) ensure();
       pbox.hidden=!open; pbtn.setAttribute('aria-expanded',String(open)); pbtn.textContent=open?'Hide live preview':'Show live preview'; fit();
     });
     render();
